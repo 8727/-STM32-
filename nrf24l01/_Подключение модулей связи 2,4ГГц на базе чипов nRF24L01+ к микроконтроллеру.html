@@ -1,0 +1,1066 @@
+
+<!-- saved from url=(0036)https://aterlux.ru/article/nrf24l01p -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>﻿Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/style.css">
+ </head>
+ <body>
+  <table cellspacing="0" cellpadding="0" class="pagebound" width="100%" height="100%">
+   <tbody><tr width="100%">
+    <td valign="TOP" align="LEFT" width="100%">
+<div class="article">
+<h1>﻿Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру</h1>
+<div class="contents">
+<a href="https://aterlux.ru/article/nrf24l01p#__h2_1">Правовые нормы использования радиочастот</a><br>
+<a href="https://aterlux.ru/article/nrf24l01p#__h2_2">Основные сведения</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_3">Назначение выводов</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_4">GND</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_5">VCC</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_6">CE</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_7">CSN</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_8">SCK</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_9">MOSI</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_10">MISO</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_11">IRQ</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_12">Команды</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_13">Регистры</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#CONFIG">0x00 CONFIG</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#EN_AA">0x01 EN_AA</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#EN_RXADDR">0x02 EN_RXADDR</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#SETUP_AW">0x03 SETUP_AW</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#SETUP_RETR">0x04 SETUP_RETR</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RF_CH">0x05 RF_CH</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RF_SETUP">0x06 RF_SETUP</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#STATUS">0x07 STATUS</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#OBSERVE_TX">0x08 OBSERVE_TX</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RPD">0x09 RPD</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P0">0x0A RX_ADDR_P0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P1">0x0B RX_ADDR_P1</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P2">0x0C-0x0F RX_ADDR_P2 - RX_ADDR_P5</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#TX_ADDR">0x10 TX_ADDR</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#RX_PW_P0">0x11-0x16 RX_PW_P0 - RX_PW_P5</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#FIFO_STATUS">0x17 FIFO_STATUS</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#DYNPD">0x1C DYNPD</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#FEATURE">0x1D FEATURE</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_32">Структура пакета</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_33">Преамбула</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_34">Адрес</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_35">Управляющее поле</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_36">Данные</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_37">CRC</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_38">Краткое описание алгоритма приёма</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_39">Краткое описание алгоритма передачи</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#DELAYS">Необходимые временные задержки</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_41">Определения для языка C</a><br>
+<a href="https://aterlux.ru/article/nrf24l01p#__h2_42">Подключение SPI</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_43">Использование аппаратного интерфейса SPI</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_44">Использование аппаратного интерфейса USART в режиме SPI-master</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_45">Использование программной реализации интерфейса SPI</a><br>
+<a href="https://aterlux.ru/article/nrf24l01p#__h2_46">Взаимодействие с nRF24L01+</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_47">Функции настройки портов и базового взаимодействия</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_48">Первоначальная настройка регистров</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h3_49">Отправка и приём сообщений</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_50">Двусторонний обмен</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_51">Только приём</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://aterlux.ru/article/nrf24l01p#__h4_52">Только передача</a><br>
+</div>
+<br>
+<p>Автор: Погребняк Дмитрий</p>
+<p>Самара, 2015.</p>
+<br>
+<p>Микрочипы nRF24L01+ для радиосвязи от норвежской компании <a href="http://www.nordicsemi.com/" target="_blank">Nordic Semiconductor</a> приобрели значительную популярность. </p>
+<p>Они позволяют обеспечить коммуникацию между двумя микроконтроллерными устройствами на частоте 2,4ГГц. Чипы осуществляют обмен на скорости до 2Мбит в секунду и берут на себя такие функции как формирование пакетов, вычисление контрольной суммы, подтверждение приёма и даже автоматическую повторную передачу. При этом различные энергосберегающие режимы позволяют экономно расходовать энергию, при работе от батарей. Всё это, вкупе с небольшой стоимостью чипов и модулей на их основе и позволило им снискать популярность.</p>
+<br>
+<p>Радиолюбителям они известны в составе разнообразных радио-модулей на их основе, выпуск которых налажен в Китае. На ebay для заказа доступны разные варианты, среди них наиболее распространённый вариант, это радио-модуль 15x29мм с кварцевым резонатором и антенной, выполненной в виде дорожки на плате. Такие модули <a href="http://www.ebay.com/sch/i.html?LH_BIN=1&amp;_nkw=nRF24l01%2B+module" target="_blank">продаются на ebay</a> по цене около 2 долларов за пару, включая стоимость доставки в Россию. </p>
+<p>Такие модули обеспечивают «комнатную» связь на расстоянии до 10 метров.</p>
+<p><a href="http://www.ebay.com/sch/i.html?LH_BIN=1&amp;_nkw=nRF24l01%2B+-pa+-lna+sma+antenna+module" target="_blank">Более продвинутые варианты</a> модулей имеют выход на sma антенну, которая значительно улучшает параметры связи, <a href="http://www.ebay.com/sch/i.html?LH_BIN=1&amp;_nkw=nRF24l01%2B+pa+lna+sma+antenna+module" target="_blank">а также варианты</a>, включающие в состав малошумящий усилитель  и усилитель мощности, обеспечивающий выходную мощность на уровне более 20dBm, с заявленной дальностью связи до 1100 метров. Такие модули уже продаются в комплекте с антенной примерно по 5-6 долларов за штуку. Эти модули имеют одинаковую разводку разъёма для подключения, и поэтому полностью взаимозаменяемы.</p>
+<br>
+<p></p><center><table width="1" cellspacing="0" cellpadding="0" class="imgtable" style="margin-right:10px; align:center"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_modules.jpg" alt="Слева-направо: модуль 1мВт с антенной в виде дорожки меди на плате, модуль 1мВт с sma-выходом на антенну, модуль 100мВт с sma-выходом на антенну и чипом усиления. Сверху - sma-антенна 2,4ГГц 2dBi" class="artimg"></td></tr><tr width="1" class="imgtablelabel"><td class="imgtablelabel">Слева-направо: модуль 1мВт с антенной в виде дорожки меди на плате, модуль 1мВт с sma-выходом на антенну, модуль 100мВт с sma-выходом на антенну и чипом усиления. Сверху - sma-антенна 2,4ГГц 2dBi</td></tr></tbody></table></center><p></p>
+<br>
+<p>В этой статье речь пойдёт о подключении таких модулей к микроконтроллерам AVR.</p>
+<br>
+<br>
+<a name="__h2_1"></a><h2>Правовые нормы использования радиочастот</h2>
+<p>Диапазон частот 2400 – 2500 МГц относится к т.н. международному «промышленному научному и медицинскому диапазону радиочастот» (<a href="https://en.wikipedia.org/wiki/ISM_band">ISM band</a>).</p>
+<br>
+<p>Использование радиоэлектронных средств в России регулируется <a href="http://base.garant.ru/12137217/" target="_blank">Правилами регистрации радиоэлектронных средств и высокочастотных устройств</a>. Раздел «Изъятия из перечня радиоэлектронных средств и высокочастотных устройств, подлежащих регистрации» определяет перечень радиочастотного оборудования, не подлежащего регистрации. В частности, пункт 24 разрешает использование частот 2400-2483,5 Мгц в устройствах малого радиуса действия, используемых «в сетях беспроводной передачи данных в полосе радиочастот 2400 - 2483,5 МГц, с максимальной эквивалентной изотропно излучаемой мощностью передатчика не более 100 мВт при использовании прямого расширения спектра и других отличных от псевдослучайной перестройки рабочей частоты видов модуляции ... при максимальной спектральной плотности эквивалентной изотропно излучаемой мощности 2 мВт/МГц».</p>
+<p>Т.е. допускается использование передатчиков nRF24L01 на каналах 0...83 (2400...2483 МГц) без усилителей мощности сигнала.</p>
+<br>
+<p>Условия использования частот в диапазоне от 2500Мгц изложены в п.13:</p>
+<p>«Пользовательское (оконечное) оборудование передающее, включающее в себя приемное устройство, работающее в полосах радиочастот 2300 - 2400 МГц, 2500 - 2690 МГц, 3400 - 3450 МГц и 3500 - 3550 МГц, с допустимой мощностью излучения передатчика не более 1 Вт, в том числе встроенное либо входящее в состав других устройств»</p>
+<p>Т.е. допускается использование модулей nRF24L01 на каналах 100...125 (2500...2525 МГц) с усилителем мощности.</p>
+<br>
+<p>Как видно, документ не описывает использование частот в диапазоне 2484 – 2499 МГц. Т.е. использовать каналы 84...99 (2484...2499 МГц) передатчиков nRF24L01 не допускается.</p>
+<br>
+<a name="__h2_2"></a><h2>Основные сведения</h2>
+<p>Спецификацию на чип можно <a href="http://www.nordicsemi.com/eng/nordic/download_resource/8765/2/56859225" target="_blank">скачать на официальном сайте</a>.</p>
+<br>
+<p>Чип nRF24L01+ работает при напряжении питания от 1,9 до 3,6 Вольт. Его входы толерантны к напряжению до 5,25 Вольт. Это значит, что его можно подключать к микроконтроллеру, работающему на напряжении 5 Вольт, однако в этом случае, допустимые напряжения питания чипа ограничены диапазоном от 2,7 до 3,3 Вольт.</p>
+<br>
+<p>Чип взаимодействует  с микроконтроллером по 4-хпроводной шине SPI.  Кроме этого используются ещё две линии: входная линия CE, сигнал высокого уровня переводит чип из ждущего режима в режим приёма, или передачи. И выходная линия IRQ, на которой устанавливается низкий уровень, когда чип принимает пакет данных, или завершает передачу.</p>
+<br>
+<p>Максимальная скорость передачи цифровых данных в радиоэфир - 2Мбит/с. Может быть установлена пониженная скорость 1Мбит/с, обеспечивающая лучшее качество связи, также доступна низкая скорость 250кбит/с для совместимости с другими версиями чипов.</p>
+<div class="box_note"><p>Хотя максимальная скорость передачи в радио-эфир составляет 2Мбит/с, при включенном режиме подтверждения приёма за один сеанс обмена может быть передано 32 байта полезных данных. Один сеанс обмена включает в себя 2 калибровки схемы PLL (при переходе в режим приёма и при переходе в режим передачи), каждая по 130мкс, и передачу сопутствующих данных, составляющих структуру пакета, как в прямом так и обратном направлении (в виде подтверждения). </p>
+<p>При минимальной длине поля адреса 3 байта и поля CRC 1 байт, длина вспомогательных данных при отправке и пакета подтверждения составит 49 бит. Значит, одна передача пакета с 32 байтами данных с подтверждением доставки займёт минимум 437мкс при скорости 2Мбит/с и 614мкс при скорости 1Мбит/с. Значит, теоретическая максимальная возможная скорость передачи составит 73 226.5 байта в секунду при скорости обмена 2Мбит/с, и 52 117.3 байта в секунду при скорости обмена 1Мбит/с.</p>
+<br>
+<p>При отключении автоматического контроля доставки количество передаваемых полезных данных за единицу времени может быть значительно повышено. В этом случае, однако, следует помнить что хотя бы один раз в 4мс должна происходить перекалибровка PLL передатчика (TX settling), которая занимает 130мкс.</p>
+<p>Теоретическая предельная скорость передачи данных при условии отключенного автоподтверждения и контроля доставки составит 203 016 байта в секунду на скорости 2Мбит/с и 101 508 - при скорости 1Мбит/с.</p>
+</div>
+<br>
+<p>Максимальная мощность передатчика самого чипа (без внешних усилителей) – 0dBm (1мВт); чувствительность приёмника -82dBm при скорости 2Мбит/с, и -85dBm при скорости 1Мбит/с.</p>
+<br>
+<p>Чип работает на частотах в диапазоне 2400-2525 МГц. Конкретная частота из этого диапазона с шагом в 1МГц задаётся настройками.</p>
+<br>
+<p>Энергопотребление чипа составляет около 0,9мкА в режиме power-down, до 11,3мА при передаче, и до 13,5мА при приёме, и 26 и 320мкА в режимах готовности (standby-I и standby-II). Использование автоматизации в передаче пакета позволяет минимизировать время нахождения в энергоёмких режимах, тем самым значительно снижая энергопотребление устройств работающих в режиме передатчика. </p>
+<br>
+<p>Чип может работать как  в режиме приёмника, так и в режиме передатчика, но в каждый момент времени может находиться только в одном из этих двух состояний. Формирование пакетов и контроль передачи происходит автоматически. Максимальная длина полезного содержимого пакета – 32 байта.</p>
+<br>
+<p>И приёмник и передатчик используют очереди FIFO на три элемента каждая. В каждый элемент очередь помещается всё содержимое пакета сразу, и извлекаться из очереди должно также за одну операцию чтения.</p>
+<br>
+<p>Приёмник поддерживает получение данных по шести каналам, в зависимости от переданного адреса. Каналы 1-5 различаются только младшим байтом адреса. Адрес канала 0 может быть настроен независимо, но при передаче этот канал используется для получения подтверждений приёма.</p>
+<br>
+<a name="__h3_3"></a><h3>Назначение выводов</h3>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_pins.jpg" alt="Назначение выводов" class="artimg"></td></tr><tr width="1" class="imgtablelabel"><td class="imgtablelabel">Назначение выводов</td></tr></tbody></table></p>
+<a name="__h4_4"></a><h4>GND</h4>
+<p>Общий, "земля".</p>
+<br>
+<a name="__h4_5"></a><h4>VCC</h4>
+<p>Питание, от 1.9 до 3.6 Вольт. Однако, если напряжение на линиях MOSI, SCK, CE, SN более 3.6 Вольт, то напряжение питания должно быть в пределах 2.7 - 3.3 Вольт.</p>
+<br>
+<a name="__h4_6"></a><h4>CE</h4>
+<p>Входной, активный - высокий уровень. Наличие высокого уровня на этом входе активирует режим приёма. В режиме передачи импульс не менее 10мкс начинает передачу.</p>
+<br>
+<a name="__h4_7"></a><h4>CSN</h4>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_power1.gif" alt="Раздельное подключение питания" class="artimg"></td></tr><tr width="1" class="imgtablelabel"><td class="imgtablelabel">Раздельное подключение питания</td></tr></tbody></table></p>
+<p>Входной, активный - низкий уровень. Низкий уровень устанавливает границы сеанса обмена по шине SPI.</p>
+<br>
+<a name="__h4_8"></a><h4>SCK</h4>
+<p>Входной. Тактовый импульс для обмена по шине SPI. Данные на линиях MOSI и MISO считываются противоположной стороной по нарастающему фронту на линии SCK, и выставляются по спаду.</p>
+<br>
+<a name="__h4_9"></a><h4>MOSI</h4>
+<p>Входной. Линия SPI, передающая данные от микроконтроллера к радио-модулю.</p>
+<br>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_power2.gif" alt="Совмещённое подключение питания" class="artimg"></td></tr><tr width="1" class="imgtablelabel"><td class="imgtablelabel">Совмещённое подключение питания</td></tr></tbody></table></p>
+<a name="__h4_10"></a><h4>MISO</h4>
+<p>Выходной. Линия SPI, передающая данные от радио-модуля к микроконтроллеру.</p>
+<br>
+<a name="__h4_11"></a><h4>IRQ</h4>
+<p>Выходной, активный - низкий уровень. При наличии одного из прерываний устанавливается низкий уровень на этой линии. </p>
+<br>
+<a name="__h3_12"></a><h3>Команды</h3>
+<p>Сеанс обмена начинается с установки низкого уровня на линии CSN. Первый переданный после этого от микроконтроллера байт является командой. Одновременно с байтом команды от микроконтроллера, к микроконтроллеру по линии MISO передаётся байт статуса.</p>
+<br>
+<p><b>Перечень команд:</b></p>
+<a name="COMMANDS"></a><table class="wired">
+ <tbody><tr><td><b>Наименование</b></td><td><b>Двоичный код</b></td><td><b>16-чный код</b></td><td><b>Размер данных</b></td><td colspan="2"><b>Описание</b></td></tr>
+ <tr><td>R_REGISTER</td><td nowrap="">000n nnnn</td><td nowrap="">0x00 + n</td><td nowrap="">1-5 (приём)</td><td colspan="2">Прочитать регистр n</td></tr>
+ <tr><td>W_REGISTER</td><td nowrap="">001n nnnn</td><td nowrap="">0x20 + n</td><td nowrap="">1-5 (передача)</td><td colspan="2">Записать регистр n</td></tr>
+ <tr><td>R_RX_PAYLOAD</td><td nowrap="">0110 0001</td><td>0x61</td><td nowrap="">1-32 (приём)</td><td colspan="2">Принять данные из верхнего слота очереди приёмника. После чтения данные из очереди удаляются</td></tr>
+ <tr><td>W_TX_PAYLOAD</td><td nowrap="">1010 0000</td><td>0xA0</td><td nowrap="">1-32 (передача)</td><td colspan="2">Записать в очередь передатчика данные для отправки</td></tr>
+ <tr><td>FLUSH_TX</td><td nowrap="">1110 0001</td><td>0xE1</td><td align="left">0</td><td colspan="2">Сбросить очередь передатчика</td></tr>
+ <tr><td>FLUSH_RX</td><td nowrap="">1110 0010</td><td>0xE2</td><td align="left">0</td><td colspan="2">Сбросить очередь приёмника</td></tr>
+ <tr><td>REUSE_TX_PL</td><td nowrap="">1110 0011</td><td>0xE3</td><td align="left">0</td><td colspan="2">Использовать повторно последний переданный пакет</td></tr>
+ <tr><td>R_RX_PL_WID</td><td nowrap="">0110 0000</td><td>0x60</td><td nowrap="">1 (приём)</td><td colspan="2">Прочитать размер данных принятого пакета в начале очереди приёмника. Значение больше 32, означает ошибку приёма, в таком случае пакет должен быть удалён командой FLUSH_RX</td></tr>
+ <tr><td>W_ACK_PAYLOAD</td><td nowrap="">1010 1ppp</td><td nowrap="">0xA8 + p</td><td nowrap="">1-32 (передача)</td><td colspan="2">Записать данные для отправки с пакетом подтверждения по каналу p. При этом бит EN_ACK_PAY в регистре FEATURE должен быть установлен</td></tr>
+ <tr><td>W_TX_PAYLOAD_NOACK</td><td nowrap="">1011 0000</td><td>0xB0</td><td nowrap="">1-32 (передача)</td><td colspan="2">Записать в очередь передатчика данные для отправки, для которых не требуется подтверждение приёма.</td></tr>
+ <tr><td>NOP</td><td nowrap="">1111 1111</td><td>0xFF</td><td align="left">0</td><td colspan="2">Нет операции. Может быть использовано для чтения регистра статуса</td></tr>
+</tbody></table>
+<br>
+<p>Все байты данных, сопутствующие команде должны быть переданы/получены в течение одного сеанса обмена.</p>
+<p>Сеанс обмена завершается установкой высокого уровня на линии CSN</p>
+<br>
+<a name="__h3_13"></a><h3>Регистры</h3>
+<a name="CONFIG"></a><h4>0x00 CONFIG</h4>
+<p>Регистр настроек.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">MASK_RX_DR</td><td style="width:100px;text-align:center">MASK_TX_DS</td><td style="width:100px;text-align:center">MASK_MAX_RT</td><td style="width:100px;text-align:center">EN_CRC</td><td style="width:100px;text-align:center">CRCO</td><td style="width:100px;text-align:center">PWR_UP</td><td style="width:100px;text-align:center" colspan="2">PRIM_RX</td></tr>
+</tbody></table>
+<br>
+<p><b>MASK_RX_DR</b>, <b>MASK_TX_DS</b>, <b>MASK_MAX_RT</b> - маскировка источников прерываний. При установке одного из этих бит в единицу, соответствующее событие и установка соответствующего бита в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a> не будет генерировать сигнал прерывания на линии IRQ.</p>
+<p><b>EN_CRC</b> - включает расчёт контрольной суммы (CRC). Если включено автоподтверждение приёма путём установки хотя бы одного бита в регистре <a href="https://aterlux.ru/article/nrf24l01p#EN_AA">EN_AA</a>, то значение этого бита устанавливается в единицу автоматически.</p>
+<p><b>CRCO</b> - Определяет размер поля контрольной суммы (CRC): 0 - 1 байт; 1 - 2 байта</p>
+<p><b>PWR_UP</b> - Включает питание. Если этот бит равен нулю, то чип находится в режиме отключения, и потребляет около 0,9мкА, в таком режиме радиообмен невозможен. </p>
+<p>После включения питания до начала работы в режиме приёмника или передатчика (т.е. до выставления высокого уровня на линии CE) необходимо выдержать паузу, достаточную для выхода осциллятора на режим, типично 1.5мс (подробнее см. в разделе <a href="https://aterlux.ru/article/nrf24l01p#DELAYS">"Необходимые временные задержки"</a>).</p>
+<p><b>PRIM_RX</b> - Выбор режима: 0 - PTX (передатчик) 1 - PRX (приёмник). </p>
+<p>Если переход в режим передатчика осуществляется сразу после завершения приёма пакета (появления прерывания RX_DR), и автоматическое подтверждение приёма включено, то необходимо обеспечить паузу с момента появления прерывания до перевода в режим PTX, во время которой чип отправит пакет подтверждения, типично не более 203 мкс (подробнее см. в разделе <a href="https://aterlux.ru/article/nrf24l01p#DELAYS">"Необходимые временные задержки"</a>).</p>
+<br>
+<a name="EN_AA"></a><h4>0x01 EN_AA</h4>
+<p>Включает автоподтверждение приёма.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">ENAA_P5</td><td style="width:100px;text-align:center">ENAA_P4</td><td style="width:100px;text-align:center">ENAA_P3</td><td style="width:100px;text-align:center">ENAA_P2</td><td style="width:100px;text-align:center">ENAA_P1</td><td style="width:100px;text-align:center" colspan="2">ENAA_P0</td></tr>
+</tbody></table>
+<br>
+<p><b>ENAA_Px</b> - установка бита включает автоматическую отправку подтверждения приёма данных по соответствующему каналу.</p>
+<br>
+<a name="EN_RXADDR"></a><h4>0x02 EN_RXADDR</h4>
+<p>Выбирает активные каналы приёмника.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">ERX_P5</td><td style="width:100px;text-align:center">ERX_P4</td><td style="width:100px;text-align:center">ERX_P3</td><td style="width:100px;text-align:center">ERX_P2</td><td style="width:100px;text-align:center">ERX_P1</td><td style="width:100px;text-align:center" colspan="2">ERX_P0</td></tr>
+</tbody></table>
+<br>
+<p><b>ERX_Px</b> - включает приём данных по соответствующему каналу. </p>
+<p>При использовании устройства в качестве передатчика с включенной функцией автоподтверждения, ответ от удалённого устройства принимается на канале 0. Поэтому бит ERX_P0 должен быть установлен в 1, для использования передачи с автоподтвреждением.</p>
+<br>
+<a name="SETUP_AW"></a><h4>0x03 SETUP_AW</h4>
+<p>Задаёт длину поля адреса.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center" colspan="3">AW</td></tr>
+</tbody></table>
+<p><b>AW</b> - два бита, задающие длину поля адреса: <i>01</i> - 3 байта; <i>10</i> - 4 байта; <i>11</i> - 5 байт.</p>
+<p>Эта настройка влияет на передачу и приём пакетов по всем каналам. Данная настройка у передающего и принимающего устройств должна быть идентичной.</p>
+<br>
+<a name="SETUP_RETR"></a><h4>0x04 SETUP_RETR</h4>
+<p>Настройка параметров автоматического повтора отправки.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center" colspan="4">ARD</td><td style="width:100px;text-align:center" colspan="5">ARC</td></tr>
+</tbody></table>
+<p><b>ARD</b> - четыре бита, задающие время ожидания подтверждения приёма перед повторной отправкой: <i>0000</i> - 250мкс; <i>0001</i> - 500мкс; <i>0010</i> - 750мкс; ... ; <i>1111</i> - 4000мкс;</p>
+<p>Значение поля ARD необходимо выбирать в зависимости от скорости обмена и количества данных, передаваемых с пакетом подтверждения. Если данные с пакетом подтверждения не передаются, то для скоростей обмена 1 и 2 Мбит/с достаточное время ожидания 250мкс. Если вместе с пакетом подтверждения на скорости 1Мбит/с передаётся более 5 байт данных, или более 15 на скорости 2Мбит/с, или скорость обмена выбрана 250кбит/с, то необходимо выбрать паузу 500мкс.</p>
+<p><b>ARC</b> - четыре бита, задающие количество автоматических повторов отправки. <i>0000</i> - автоповтор отключен; <i>0001</i> - возможен однократный повтор; ... ; <i>1111</i> - возможно до 15 повторов.</p>
+<br>
+<a name="RF_CH"></a><h4>0x05 RF_CH</h4>
+<p>Регистр задаёт номер радиоканала - частоту несущей с шагом 1Мгц. Радиочастота несущей вычисляется по формуле 2400 + RF_CH МГц.</p>
+<p>Допустимые значения от 0 до 125. При обмене на скорости 2Мбит/с, частота должна отличатся от частоты используемой другими устройствами минимум на 2 МГц.</p>
+<br>
+<a name="RF_SETUP"></a><h4>0x06 RF_SETUP</h4>
+<p>Задаёт настройки радиоканала.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">CONT_WAVE</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">RF_DR_LOW</td><td style="width:100px;text-align:center">PLL_LOCK</td><td style="width:100px;text-align:center">RF_DR_HIGH</td><td style="width:100px;text-align:center" colspan="2">RF_PWR</td><td style="width:100px;text-align:center" colspan="2">-</td></tr>
+</tbody></table>
+<p><b>CONT_WAVE</b> - Непрерывная передача несущей. Предназначено для тестирования</p>
+<p><b>RF_DR_LOW</b> - Включает низкую скорость передачи 250кбит/с. При этом бит RF_DR_HIGH должен быть 0</p>
+<p><b>PLL_LOCK</b> - предназначено для тестирования.</p>
+<p><b>RF_DR_HIGH</b> - Выбор скорости обмена (при значении бита RF_DR_LOW = 0): <i>0</i> - 1Мбит/с; <i>1</i> - 2Мбит/с</p>
+<p><b>RF_PWR</b> - 2 бита, задающих мощность передатчика: <i>00</i> - -18dBm; <i>01</i> - -12dBm; <i>10</i> - -6dBm; <i>11</i> - 0dBm</p>
+<br>
+<a name="STATUS"></a><h4>0x07 STATUS</h4>
+<p>Регистр статуса. Его значение также передаётся на линии MISO одновременно с передачей байта команды по интерфейсу SPI.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">RX_DR</td><td style="width:100px;text-align:center">TX_DS</td><td style="width:100px;text-align:center">MAX_RT</td><td style="width:100px;text-align:center" colspan="3">RX_P_NO</td><td style="width:100px;text-align:center" colspan="2">TX_FULL</td></tr>
+</tbody></table>
+<br>
+<p><b>RX_DR</b> - Прерывание по получению пакета. Бит устанавливается в единицу, когда усройство в режиме приняло адресованый ему пакет с совпавшей контрольной суммой. Бит сбрасывается путём записи в него значения 1.</p>
+<p>Принятый пакет доступен в очереди приёмника, и может быть прочитан командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">R_RX_PAYLOAD</a>, либо удалён командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">FLUSH_RX</a>. </p>
+<p><b>TX_DS</b> - Прерывание по успешной отправке пакета. Бит устанавливается в единицу, когда устройство в режиме передатчика успешно отправило пакет и, если включено автоподтверждение, приняло подтверждение получения. После успешной отправки пакет удаляется из очереди передатчика. Бит сбрасывается путём записи в него значения 1.</p>
+<p><b>MAX_RT</b> - Прерывание по превышению числа попыток повторной отправки. Бит устанавливается в единицу, когда устройство в режиме передатчика предприняло заданное в регистре <a href="https://aterlux.ru/article/nrf24l01p#SETUP_RETR">SETUP_RETR</a> количество попыток отправки, но так и не получило подтверждение от удалённого устройства. Передаваемый пакет остаётся в очереди передатчика. Для удаления его можно воспользоваться командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">FLUSH_TX</a>. Дальнейшая коммуникация невозможна, пока этот бит установлен. Бит сбрасывается путём записи в него значения 1.</p>
+<p>Пока любой из бит <b>RX_DR</b>, <b>TX_DS</b>, <b>MAX_RT</b> установлен в единицу и соответствующее ему прерывание не запрещено (т.е. соответствующие из бит <b>MASK_RX_DR</b>, <b>MASK_TX_DS</b>, <b>MASK_MAX_RT</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#CONFIG">CONFIG</a> равны нулю), то на выходе IRQ чипа устанавливается низкий уровень. Для сброса значений этих бит, необходимо записать регистр STATUS с этими битами, установленными в 1.</p>
+<br>
+<p><b>RX_P_NO</b> - три бита кодирующие номер канала, пакет по которому доступен в начале очереди приёмника для чтения. Значения <i>000</i> - <i>101</i> кодируют каналы с 0 по 5, соответственно, значение <i>111</i> указывает, что очередь приёмника пуста.</p>
+<p><b>TX_FULL</b> - значение 1 этого бита показывает, что в очереди передатчика нет свободных слотов.</p>
+<br>
+<a name="OBSERVE_TX"></a><h4>0x08 OBSERVE_TX</h4>
+<p>Регистр контроля передатчика</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center" colspan="4">PLOS_CNT</td><td style="width:100px;text-align:center" colspan="5">ARC_CNT</td></tr>
+</tbody></table>
+<p><b>PLOS_CNT</b> - четыре бита, значение которых увеличивается, вплоть до достижения 15, при каждой отправке, на которую не получено ожидаемое подтверждение. Значение сбрасывается при записи в регистр <a href="https://aterlux.ru/article/nrf24l01p#RF_CH">RF_CH</a>.</p>
+<p><b>ARC_CNT</b> - четыре бита, возвращающие количество предпринятых повторов отправки при передаче последнего пакета. Сбрасывается в 0, когда начинается отправка очередного пакета.</p>
+<br>
+<a name="RPD"></a><h4>0x09 RPD</h4>
+<p>Оценка мощности принимаемого сигнала</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center" colspan="2">RPD</td></tr>
+</tbody></table>
+<p><b>RPD</b> - младший бит принимает значение 1, если чип находится в режиме приёмника, и уровень принимаемого сигнала превышает -64dBm</p>
+<br>
+<a name="RX_ADDR_P0"></a><h4>0x0A RX_ADDR_P0</h4>
+<p>40-битный (5 байт) регистр, используемый для указания адреса канала 0 приёмника. Этот канал используется для приёма автоподтверждений в режиме передатчика. Автоподтверждения высылаются принимающей стороной с указанием собственного адреса. Поэтому значение этого регистра должно соответствовать значению регистра <a href="https://aterlux.ru/article/nrf24l01p#TX_ADDR">TX_ADDR</a> для корректной работы в режиме передатчика.</p>
+<p>Реальная используемая ширина адреса задаётся в регистре <a href="https://aterlux.ru/article/nrf24l01p#SETUP_AW">SETUP_AW</a>.</p>
+<p>Значение регистра записывается и читается, начиная с младших байт. Если записано менее 5 байт, то старшие байты остаются неизменными.</p>
+<p>Значение регистра по умолчанию: <i>0xE7E7E7E7E7</i></p>
+<br>
+<a name="RX_ADDR_P1"></a><h4>0x0B RX_ADDR_P1</h4>
+<p>40-битный (5 байт) регистр, используемый для указания адреса канала 1 приёмника. Старшие 4 байта этого регистра являются общими для адресов на каналах 1 - 5.</p>
+<p>Реальная используемая ширина адреса задаётся в регистре <a href="https://aterlux.ru/article/nrf24l01p#SETUP_AW">SETUP_AW</a>.</p>
+<p>Значение регистра записывается и читается, начиная с младших байт. Если записано менее 5 байт, то старшие байты остаются неизменными.</p>
+<p>Значение регистра по умолчанию: <i>0xC2C2C2C2C2</i></p>
+<br>
+<a name="RX_ADDR_P2"></a><h4>0x0C-0x0F RX_ADDR_P2 - RX_ADDR_P5</h4>
+<p>8-битные регистры, задающие значения младшего байта адреса для каналов 2-5. Значения старших 32 бит берутся из регистра <a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P1">RX_ADDR_P1</a>.</p>
+<p>Значение регистров по умолчанию: <i>0xC3</i>, <i>0xC4</i>, <i>0xC5</i>, <i>0xC6</i>, соответственно.</p>
+<br>
+<a name="TX_ADDR"></a><h4>0x10 TX_ADDR</h4>
+<p>40-битный (5 байт) регистр, используемый в режиме передатчика в качестве адреса удалённого устройства. При включенном режиме автоподтверждения, удалённое устройство ответит подтверждением с указанием своего же адреса. Это подтверждение принимается на канале 0, поэтому для успешной передачи, значение регистра <a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P0">RX_ADDR_P0</a> должно быть идентично этому.</p>
+<p>Реальная используемая ширина адреса задаётся в регистре <a href="https://aterlux.ru/article/nrf24l01p#SETUP_AW">SETUP_AW</a>.</p>
+<p>Значение регистра записывается и читается, начиная с младших байт. Если записано менее 5 байт, то старшие байты остаются неизменными.</p>
+<p>Значение регистра по умолчанию: <i>0xE7E7E7E7E7</i></p>
+<br>
+<a name="RX_PW_P0"></a><h4>0x11-0x16 RX_PW_P0 - RX_PW_P5</h4>
+<p>8-битные регистры, задающие размер данных, принимаемых по каналам, соответственно 0-5, если не включена поддержка произвольной длины пакетов в регистрах <a href="https://aterlux.ru/article/nrf24l01p#DYNPD">DYNPD</a> и <a href="https://aterlux.ru/article/nrf24l01p#FEATURE">FEATURE</a>. Значение <i>0</i> указывает что канал не используется. Допустимы значения длины от <i>1</i> до <i>32</i>.</p>
+<br>
+<a name="FIFO_STATUS"></a><h4>0x17 FIFO_STATUS</h4>
+<p>Состояние очередей FIFO приёмника и передатчика</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">TX_REUSE</td><td style="width:100px;text-align:center">TX_FULL</td><td style="width:100px;text-align:center">TX_EMPTY</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">RX_FULL</td><td style="width:100px;text-align:center" colspan="2">RX_EMPTY</td></tr>
+</tbody></table>
+<p><b>TX_REUSE</b> Признак готовности последнего пакета для повтрной отправки. Устанавливается командой REUSE_TX_PL.</p>
+<p><b>TX_FULL</b> Флаг переполнения FIFO очереди передатчика: <i>0</i> - есть свободное место в очереди; <i>1</i> - очередь переполнена.</p>
+<p><b>TX_EMPTY</b> Флаг освобождения FIFO очереди передатчика: <i>0</i> - в очереди есть данные; <i>1</i> - очередь пуста.</p>
+<p><b>RX_FULL</b> Флаг переполнения FIFO очереди приёмника: <i>0</i> - есть свободное место в очереди; <i>1</i> - очередь переполнена.</p>
+<p><b>RX_EMPTY</b> - Флаг освобождения FIFO очереди приёмника: <i>0</i> - в очереди есть данные; <i>1</i> - очередь пуста.</p>
+<br>
+<a name="DYNPD"></a><h4>0x1C DYNPD</h4>
+<p>Разрешение использования пакетов произвольной длины.</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">DPL_P5</td><td style="width:100px;text-align:center">DPL_P4</td><td style="width:100px;text-align:center">DPL_P3</td><td style="width:100px;text-align:center">DPL_P2</td><td style="width:100px;text-align:center">DPL_P1</td><td style="width:100px;text-align:center" colspan="2">DPL_P0</td></tr>
+</tbody></table>
+<p><b>DPL_Px</b> разрешает приём пакетов произвольной длины по соответствующему каналу. При этом такая опция должна быть включена установленным битом <b>EN_DPL</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#FEATURE">FEATURE</a>, а также включено автоподтверждение установкой соответствующего бита <b>ENAA_Px</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#EN_AA">EN_AA</a></p>
+<p>В случае если бит принимает значение 0, то размер данных в принимаемых пакетах должен быть равен значению соответствующего регистра <a href="https://aterlux.ru/article/nrf24l01p##RX_PW_P0">RX_PW_Px</a></p>
+<br>
+<a name="FEATURE"></a><h4>0x1D FEATURE</h4>
+<p>Регистр опций</p>
+<table class="wired">
+ <tbody><tr><td style="width:100px;text-align:center" align="right">7</td><td style="width:100px;text-align:center" align="right">6</td><td style="width:100px;text-align:center" align="right">5</td><td style="width:100px;text-align:center" align="right">4</td><td style="width:100px;text-align:center" align="right">3</td><td style="width:100px;text-align:center" align="right">2</td><td style="width:100px;text-align:center" align="right">1</td><td style="width:100px;text-align:center" colspan="2" align="right">0</td></tr>
+ <tr><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">-</td><td style="width:100px;text-align:center">EN_DPL</td><td style="width:100px;text-align:center">EN_ACK_PAY</td><td style="width:100px;text-align:center" colspan="2">EN_DYN_ACK</td></tr>
+</tbody></table>
+<p><b>EN_DPL</b> включает поддержку приёма и передачи пакетов с размером поля данных произвольной длины. </p>
+<p>В этом случае приём пакетов произвольной длины по каналам должен быть разрешён в регистре DYNPD и включено автоподтверждение в регистре <a href="https://aterlux.ru/article/nrf24l01p#EN_AA">EN_AA</a>. </p>
+<p>Если опция отключена, то размер принимаемых данных задаётся значением регистров <a href="https://aterlux.ru/article/nrf24l01p#RX_PW_P0">RX_PW_P0 - RX_PW_P5</a>.</p>
+<p>При передаче также передаётся поле, указывающее длительность пакета. Длина передаваемого пакета определяется размером записанных командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_TX_PAYLOAD</a> данных и она должна соответствовать настройкам принимающей стороны.</p>
+<br>
+<p><b>EN_ACK_PAY</b> включает поддержку передачи данных с пакетами подтверждения.</p>
+<p>После включения этой опции, командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_ACK_PAYLOAD</a> в очередь передатчика могут быть помещены данные, которые будут отправлены вместе с пакетом подтверждения приёма.</p>
+<br>
+<p><b>EN_DYN_ACK</b> разрешает передавать пакеты, не требующие подтверждения приёма.</p>
+<p>После включения этой опции, командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_TX_PAYLOAD_NOACK</a> в очередь передатчика могут быть помещены данные, на которые удалённой стороне не требуется присылать подтверждение о приёме.</p>
+<br>
+<a name="__h3_32"></a><h3>Структура пакета</h3>
+<p>Чипы nRF24L01+ автоматически производят сборку пакета при передаче, контроль адреса, проверку контрольной суммы и разбор пакета при приёме. </p>
+<p>Поэтому передача и приёма данных осуществляется без оглядки на истинную структуру пакета, передаваемого в эфир, чья структура выглядит следующим образом:</p>
+<br>
+<table class="wired">
+ <tbody><tr><td style="width:180px;text-align:center"><b>Преамбула</b></td><td style="width:180px;text-align:center"><b>Адрес</b></td><td style="width:180px;text-align:center"><b>Управляющее поле</b></td><td style="width:180px;text-align:center"><b>Данные</b></td><td style="width:180px;text-align:center" colspan="2"><b>CRC</b></td></tr>
+ <tr><td style="width:180px;text-align:center">1 байт</td><td style="width:180px;text-align:center">3-5 байт</td><td style="width:180px;text-align:center">9 бит</td><td style="width:180px;text-align:center">0-32 байта</td><td style="width:180px;text-align:center" colspan="2">1-2 байта</td></tr>
+</tbody></table>
+<p>Значения всех полей передаются вначале старшим битом.</p>
+<br>
+<a name="__h4_33"></a><h4>Преамбула</h4>
+<p>Последовательность бит 01010101, или 10101010, служащая для синхронизации приёмника. Если старший бит в адресе 1, то преамбула 10101010, иначе 01010101</p>
+<br>
+<a name="__h4_34"></a><h4>Адрес</h4>
+<p>Длина поля адреса задаётся значением бит <b>AW</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#SETUP_AW">SETUP_AW</a>. Чтобы исключить ложные обнаружения адреса (что может привести к пропуску реального адреса), желательно чтобы адрес удовлетворял следующим условиям:</p>
+<p class="hyphen">-&nbsp;Старшие биты адреса не должны быть чередующимися значениями нулей и единиц, поскольку в таком случае часть преамбулы может быть спутана с адресом.</p>
+<p class="hyphen">-&nbsp;Адрес должен содержать несколько переходов из нуля в единицу и обратно, иначе за адрес могут быть приняты помехи.</p>
+<br>
+<p>Пакеты подтверждения приёма высылаются приёмником с указанием собственного адреса в этом поле. Поэтому передающая сторона должна быть настроена на получение пакетов по этому же адресу на канале 0, т.е. значение регистра <a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P0">RX_ADDR_P0</a> должно быть равно значению регистра <a href="https://aterlux.ru/article/nrf24l01p#TX_ADDR">TX_ADDR</a>.</p>
+<br>
+<a name="__h4_35"></a><h4>Управляющее поле</h4>
+<p>имеет следующую структуру</p>
+<table class="wired">
+ <tbody><tr><td style="min-width:100px;text-align:center" nowrap=""><b>Длина данных</b></td><td style="min-width:100px;text-align:center"><b>PID</b></td><td style="min-width:100px;text-align:center" colspan="2"><b>NO_ACK</b></td></tr>
+ <tr><td style="min-width:100px;text-align:center">6 бит</td><td style="min-width:100px;text-align:center">2 бита</td><td style="min-width:100px;text-align:center" colspan="2">1 бит</td></tr>
+</tbody></table>
+<br>
+<p><b>Длина данных</b> - размер поля "Данные" в пакете. Если опция данных произвольной длины отключена, принимает значение 33 (100001), в этом случае длина данных на принимающей стороне определяется значением соответствующего регистра <a href="https://aterlux.ru/article/nrf24l01p#RX_PW_P0">RX_PW_Px</a>. Значения в диапазоне 1-32 кодируют размер данных в режиме произвольной длины, значение 0 указывает на отсутствие данных и используется в пакетах подтверждения. Режим произвольной длины должен быть включен у передающей стороны для канала 0, чтобы принимать пакеты подтверждения.</p>
+<p><b>PID</b> - двухбитное поле, значение которого циклически увеличивается на 1 при отправке нового пакета. В случае если принимающая сторона приняла пакет, но отправленное подтверждение о приёме не дошло до отправляющей стороны, может быть предпринята повторная отправка с таким же значением PID, как при первой попытке. Если приёмник получает пакет, где поле PID равно полученному в предыдущий раз и значение поля CRC также идентично последнему полученному, то автоматически отправляется подтверждение о получении, но полученные данные считаются повтором и игнорируются, не помещаются в очередь FIFO приёмника, и прерывание TX_DS в этом случае не появляется.</p>
+<p><b>NO_ACK</b> - флаг указывающий получателю на то, что подтверждение получения пакета высылать не требуется. Сами пакеты подтверждения маркируются этим флагам. Также можно отправить пакет не требующий подтверждения командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_TX_PAYLOAD_NOACK</a>, если в регистре <a href="https://aterlux.ru/article/nrf24l01p#FEATURE">FEATURE</a> установлен бит <b>EN_DYN_ACK</b>.</p>
+<br>
+<a name="__h4_36"></a><h4>Данные</h4>
+<p>Поле данных содержит, собственно, передаваемые данные. Их длина определяется количеством данных, загруженных одной из команд <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_TX_PAYLOAD, W_TX_PAYLOAD_NOACK, W_ACK_PAYLOAD</a>.</p>
+<br>
+<a name="__h4_37"></a><h4>CRC</h4>
+<p>Контрольная сумма, размер определяется значением бита <b>CRCO</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#CONFIG">CONFIG</a>. Рассчитывается по полю адреса, управляющему полю и полю данных. Если при приёме пакета контрольная сумма не совпала, то пакет игнорируется, никаких действий не предпринимается.</p>
+<br>
+<br>
+<a name="__h3_38"></a><h3>Краткое описание алгоритма приёма</h3>
+<p>Переключение в режим приёмника осуществляется установкой бита <b>PRIM_RX</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#CONFIG">CONFIG</a>.</p>
+<p>Соответствующие каналы приёма должны быть разрешены в регистрах <a href="https://aterlux.ru/article/nrf24l01p#EN_AA">EN_AA</a> и <a href="https://aterlux.ru/article/nrf24l01p#EN_RXADDR">EN_RXADDR</a>, и их адреса настроены в регистрах <a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P0">RX_ADDR_Pх</a>.</p>
+<p>Прослушивание эфира начинается с появлением на линии CE высокого уровня. Приёмник анализирует эфир и пытается выделить адресованные ему пакеты с совпадающей контрольной суммой. Когда очередной такой пакет получен, выставляется бит <b>RX_DR</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a>, и на линии прерывания появляется низкий уровень. Три бита начиная с <b>RX_P_NO</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a> показывают номер канала, по которому пришёл пакет. Прочитать содержимое полученного пакета можно командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">R_RX_PAYLOAD</a>. Сбросить бит <b>RX_DR</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a> можно путём записи в него единицы.</p>
+<br>
+<a name="__h3_39"></a><h3>Краткое описание алгоритма передачи</h3>
+<p>Переключение в режим передатчика осуществляется записью значения 0 в бит <b>PRIM_RX</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#CONFIG">CONFIG</a>. В регистры <a href="https://aterlux.ru/article/nrf24l01p#TX_ADDR">TX_ADDR</a> и <a href="https://aterlux.ru/article/nrf24l01p#RX_ADDR_P0">RX_ADDR_P0</a> должен быть загружен адрес удалённой стороны.</p>
+<p>После этого, данные для отправки помещаются в очередь передатчика командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">W_TX_PAYLOAD</a>. Начало передачи инициализируется кратким, но <u>не менее 10мкс</u> импульсом на линии CE. </p>
+<p>Если пакет передан успешно и подтверждение получено, в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a> выставляется бит <b>TX_DS</b>, если превышено допустимое количество повторов, а подтверждение передачи не получено, выставляется бит <b>MAX_RT</b>. Обе ситуации приводят к выставлению на линии IRQ низкого уровня. </p>
+<p>Если выставлен бит <b>MAX_RT</b>, то переданный пакет остаётся в очереди передатчика, удалить его можно командой <a href="https://aterlux.ru/article/nrf24l01p#COMMANDS">FLUSH_TX</a>. Сбросить биты <b>TX_DS</b> и <b>MAX_RT</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#STATUS">STATUS</a> можно путём записи в них единиц. Пока бит <b>MAX_RT</b> установлен, дальнейший радиообмен невозможен.</p>
+<br>
+<a name="DELAYS"></a><h3>Необходимые временные задержки</h3>
+<p>После включения питания (установки бита <b>PWR_UP</b> в регистре <a href="https://aterlux.ru/article/nrf24l01p#CONFIG">CONFIG</a>) происходит запуск осциллятора. До начала работы в режиме приёмника или передатчика (т.е. до выставления высокого уровня на линии CE) необходимо выдержать паузу, достаточную для выхода осциллятора на режим.</p>
+<p>Необходимое для этого время пропорционально эквивалентной индуктивности используемого резонатора. Для типичных резонаторов со значением этого параметра не превышающего 30 мГн, достаточно задержки 1.5мс. При значениях эквивалентной индуктивности больше, необходимое время задержки пропорционально возрастает</p>
+<table class="wired">
+ <tbody><tr><td><b>Эквивалентная индуктивность резонатора</b></td><td colspan="2"><b>Необходимое время задержки</b></td></tr>
+ <tr><td align="center">30мГн и меньше (типичный вариант)</td><td colspan="2" align="center">1.5мс</td></tr>
+ <tr><td align="center">60мГн</td><td colspan="2" align="center">3мс</td></tr>
+ <tr><td align="center">90мГн</td><td colspan="2" align="center">4.5мс</td></tr>
+</tbody></table>
+<br>
+<p>Если включено автоматическое подтверждение приёма, то прерывание RX_DR появляется сразу по получению пакета, после этого nRF24L01+ автоматически переходит в режим передатчика, после чего в течение 130мкс происходит выравнивание частоты блока PLL, и затем осуществляется отправка пакета подтверждения.</p>
+<p>В этом случае, если отправка ответа предполагается сразу после получения пакета (появления прерывания RX_DR), то перед сбросом бита <b>PRIM_RX</b> и переходом в режим передатчика необходимо выдержать паузу достаточную, чтобы чип успел завершить передачу пакета подтверждения. Рассчитать это время можно по формуле:</p>
+<p><i><b>Время_подтверждения = 130мкс + ((длина_адреса + длина_CRC + размер_данных_в_подтверждении) * 8 + 17) / скорость_обмена</b></i></p>
+<p>Это время отсчитывается с момента появления прерывания RX_DR. Поскольку управляющий микроконтроллер на обработку прерывания, чтение пакета данных, подготовку ответа и прочее также затратит некоторое время, реальная необходимая задержка может быть значительно меньше.</p>
+<p>Типичное время, необходимое для отправки подтверждений не включающих в себя передаваемых данных:</p>
+<table class="wired">
+ <tbody><tr><td><b>Настройки</b></td><td colspan="2"><b>Время, мкс</b></td></tr>
+ <tr><td>1Мбит/с, адрес 3 байта, CRC 1 байт</td><td colspan="2" align="right">179</td></tr>
+ <tr><td>1Мбит/с, адрес 5 байт, CRC 2 байта</td><td colspan="2" align="right">203</td></tr>
+ <tr><td>2Мбит/с, адрес 5 байт, CRC 2 байта</td><td colspan="2" align="right">166.5</td></tr>
+</tbody></table>
+<a name="__h3_41"></a><h3>Определения для языка C</h3>
+<pre class="code"><span class="comment">/* Команды */</span>
+
+<span class="keyword">#define</span> <span class="const">R_REGISTER</span>          <span class="numeric">0x00</span> <span class="comment">// + n Прочитать регистр n</span>
+<span class="keyword">#define</span> <span class="const">W_REGISTER</span>          <span class="numeric">0x20</span> <span class="comment">// + n Записать регистр n</span>
+<span class="keyword">#define</span> <span class="const">R_RX_PAYLOAD</span>        <span class="numeric">0x61</span> <span class="comment">// Принять данные данные из верхнего слота очереди приёмника. </span>
+<span class="keyword">#define</span> <span class="const">W_TX_PAYLOAD</span>        <span class="numeric">0xA0</span> <span class="comment">// Записать в очередь передатчика данные для отправки</span>
+<span class="keyword">#define</span> <span class="const">FLUSH_TX</span>            <span class="numeric">0xE1</span> <span class="comment">// Сбросить очередь передатчика</span>
+<span class="keyword">#define</span> <span class="const">FLUSH_RX</span>            <span class="numeric">0xE2</span> <span class="comment">// Сбросить очередь приёмника</span>
+<span class="keyword">#define</span> <span class="const">REUSE_TX_PL</span>         <span class="numeric">0xE3</span> <span class="comment">// Использовать повторно последний переданный пакет</span>
+<span class="keyword">#define</span> <span class="const">R_RX_PL_WID</span>         <span class="numeric">0x60</span> <span class="comment">// Прочитать размер данных принятого пакета в начале очереди приёмника. </span>
+<span class="keyword">#define</span> <span class="const">W_ACK_PAYLOAD</span>       <span class="numeric">0xA8</span> <span class="comment">// + p Записать данные для отправки с пакетом подтверждения по каналу p. </span>
+<span class="keyword">#define</span> <span class="const">W_TX_PAYLOAD_NOACK</span>  <span class="numeric">0xB0</span> <span class="comment">// Записать в очередь передатчика данные, для отправки без подтверждения</span>
+<span class="keyword">#define</span> <span class="const">NOP</span>                 <span class="numeric">0xFF</span> <span class="comment">// Нет операции. Может быть использовано для чтения регистра статуса</span>
+
+<span class="comment">/* Регистры */</span>
+
+<span class="keyword">#define</span> <span class="const">CONFIG</span>      <span class="numeric">0x00</span> <span class="comment">// Регистр настроек</span>
+<span class="keyword">#define</span> <span class="const">EN_AA</span>       <span class="numeric">0x01</span> <span class="comment">// Выбор автоподтверждения</span>
+<span class="keyword">#define</span> <span class="const">EN_RXADDR</span>   <span class="numeric">0x02</span> <span class="comment">// Выбор каналов приёмника</span>
+<span class="keyword">#define</span> <span class="const">SETUP_AW</span>    <span class="numeric">0x03</span> <span class="comment">// Настройка размера адреса</span>
+<span class="keyword">#define</span> <span class="const">SETUP_RETR</span>  <span class="numeric">0x04</span> <span class="comment">// Настройка повторной отправки</span>
+<span class="keyword">#define</span> <span class="const">RF_CH</span>       <span class="numeric">0x05</span> <span class="comment">// Номер радиоканала, на котором осуществляется работа. От 0 до 125. </span>
+<span class="keyword">#define</span> <span class="const">RF_SETUP</span>    <span class="numeric">0x06</span> <span class="comment">// Настройка радиоканала</span>
+<span class="keyword">#define</span> <span class="const">STATUS</span>      <span class="numeric">0x07</span> <span class="comment">// Регистр статуса. </span>
+<span class="keyword">#define</span> <span class="const">OBSERVE_TX</span>  <span class="numeric">0x08</span> <span class="comment">// Количество повторов передачи и потерянных пакетов</span>
+<span class="keyword">#define</span> <span class="const">RPD</span>         <span class="numeric">0x09</span> <span class="comment">// Мощность принимаемого сигнала. Если младший бит = 1, то уровень более -64dBm </span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P0</span>  <span class="numeric">0x0A</span> <span class="comment">// 3-5 байт (начиная с младшего байта). Адрес канала 0 приёмника. </span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P1</span>  <span class="numeric">0x0B</span> <span class="comment">// 3-5 байт (начиная с младшего байта). Адрес канала 1 приёмника.</span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P2</span>  <span class="numeric">0x0C</span> <span class="comment">// Младший байт адреса канала 2 приёмника. Старшие байты из RX_ADDR_P1</span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P3</span>  <span class="numeric">0x0D</span> <span class="comment">// Младший байт адреса канала 3 приёмника. Старшие байты из RX_ADDR_P1</span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P4</span>  <span class="numeric">0x0E</span> <span class="comment">// Младший байт адреса канала 4 приёмника. Старшие байты из RX_ADDR_P1</span>
+<span class="keyword">#define</span> <span class="const">RX_ADDR_P5</span>  <span class="numeric">0x0F</span> <span class="comment">// Младший байт адреса канала 5 приёмника. Старшие байты из RX_ADDR_P1</span>
+<span class="keyword">#define</span> <span class="const">TX_ADDR</span>     <span class="numeric">0x10</span> <span class="comment">// 3-5 байт (начиная с младшего байта). Адрес удалённого устройства для передачи</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P0</span>    <span class="numeric">0x11</span> <span class="comment">// Размер данных при приёме по каналу 0: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P1</span>    <span class="numeric">0x12</span> <span class="comment">// Размер данных при приёме по каналу 1: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P2</span>    <span class="numeric">0x13</span> <span class="comment">// Размер данных при приёме по каналу 2: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P3</span>    <span class="numeric">0x14</span> <span class="comment">// Размер данных при приёме по каналу 3: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P4</span>    <span class="numeric">0x15</span> <span class="comment">// Размер данных при приёме по каналу 4: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">RX_PW_P5</span>    <span class="numeric">0x16</span> <span class="comment">// Размер данных при приёме по каналу 5: от 1 до 32. 0 - канал не используется.</span>
+<span class="keyword">#define</span> <span class="const">FIFO_STATUS</span> <span class="numeric">0x17</span> <span class="comment">// Состояние очередей FIFO приёмника и передатчика</span>
+<span class="keyword">#define</span> <span class="const">DYNPD</span>       <span class="numeric">0x1C</span> <span class="comment">// Выбор каналов приёмника для которых используется произвольная длина пакетов.</span>
+<span class="keyword">#define</span> <span class="const">FEATURE</span>     <span class="numeric">0x1D</span> <span class="comment">// Регистр опций</span>
+
+
+<span class="comment">/* Биты регистров */</span>
+
+<span class="comment">// CONFIG</span>
+<span class="keyword">#define</span> <span class="const">MASK_RX_DR</span>  <span class="numeric">6</span> <span class="comment">// Запрещает прерывание по RX_DR (получение пакета)</span>
+<span class="keyword">#define</span> <span class="const">MASK_TX_DS</span>  <span class="numeric">5</span> <span class="comment">// Запрещает прерывание по TX_DS (завершение отправки пакета) </span>
+<span class="keyword">#define</span> <span class="const">MASK_MAX_RT</span> <span class="numeric">4</span> <span class="comment">// Запрещает прерывание по MAX_RT (превышение числа повторных попыток отправки) </span>
+<span class="keyword">#define</span> <span class="const">EN_CRC</span>      <span class="numeric">3</span> <span class="comment">// Включает CRC</span>
+<span class="keyword">#define</span> <span class="const">CRCO</span>        <span class="numeric">2</span> <span class="comment">// Размер поля CRC: 0 - 1 байт; 1 - 2 байта</span>
+<span class="keyword">#define</span> <span class="const">PWR_UP</span>      <span class="numeric">1</span> <span class="comment">// Включение питания</span>
+<span class="keyword">#define</span> <span class="const">PRIM_RX</span>     <span class="numeric">0</span> <span class="comment">// Выбор режима: 0 - PTX (передатчик) 1 - PRX (приёмник)</span>
+
+<span class="comment">// EN_AA</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P5</span> <span class="numeric">5</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 5</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P4</span> <span class="numeric">4</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 4</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P3</span> <span class="numeric">3</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 3</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P2</span> <span class="numeric">2</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 2</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P1</span> <span class="numeric">1</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 1</span>
+<span class="keyword">#define</span> <span class="const">ENAA_P0</span> <span class="numeric">0</span> <span class="comment">// Включает автоподтверждение данных, полученных по каналу 0</span>
+
+<span class="comment">// EN_RXADDR</span>
+<span class="keyword">#define</span> <span class="const">ERX_P5</span> <span class="numeric">5</span> <span class="comment">// Включает канал 5 приёмника</span>
+<span class="keyword">#define</span> <span class="const">ERX_P4</span> <span class="numeric">4</span> <span class="comment">// Включает канал 4 приёмника </span>
+<span class="keyword">#define</span> <span class="const">ERX_P3</span> <span class="numeric">3</span> <span class="comment">// Включает канал 3 приёмника </span>
+<span class="keyword">#define</span> <span class="const">ERX_P2</span> <span class="numeric">2</span> <span class="comment">// Включает канал 2 приёмника </span>
+<span class="keyword">#define</span> <span class="const">ERX_P1</span> <span class="numeric">1</span> <span class="comment">// Включает канал 1 приёмника </span>
+<span class="keyword">#define</span> <span class="const">ERX_P0</span> <span class="numeric">0</span> <span class="comment">// Включает канал 0 приёмника </span>
+
+<span class="comment">// SETUP_AW</span>
+<span class="keyword">#define</span> <span class="const">AW</span> <span class="numeric">0</span> <span class="comment">// Два бита, Выбирает ширину поля адреса: 1 - 3 байта; 2 - 4 байта; 3 - 5 байт.</span>
+
+<span class="keyword">#define</span> <span class="const">SETUP_AW_3BYTES_ADDRESS</span> (<span class="numeric">1</span> &lt;&lt; <span class="const">AW</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_AW_4BYTES_ADDRESS</span> (<span class="numeric">2</span> &lt;&lt; <span class="const">AW</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_AW_5BYTES_ADDRESS</span> (<span class="numeric">3</span> &lt;&lt; <span class="const">AW</span>)
+
+<span class="comment">// SETUP_RETR </span>
+<span class="keyword">#define</span> <span class="const">ARD</span> <span class="numeric">4</span> <span class="comment">// 4 бита. Задаёт значение задержки перед повторной отправкой пакета: 250 x (n + 1) мкс</span>
+<span class="keyword">#define</span> <span class="const">ARC</span> <span class="numeric">0</span> <span class="comment">// 4 битай. Количество повторных попыток отправки, 0 - повторная отправка отключена.</span>
+
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_250MKS</span>  (<span class="numeric">0</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_500MKS</span>  (<span class="numeric">1</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_750MKS</span>  (<span class="numeric">2</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_1000MKS</span> (<span class="numeric">3</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_1250MKS</span> (<span class="numeric">4</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_1500MKS</span> (<span class="numeric">5</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_1750MKS</span> (<span class="numeric">6</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_2000MKS</span> (<span class="numeric">7</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_2250MKS</span> (<span class="numeric">8</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_2500MKS</span> (<span class="numeric">9</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_2750MKS</span> (<span class="numeric">10</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_3000MKS</span> (<span class="numeric">11</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_3250MKS</span> (<span class="numeric">12</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_3500MKS</span> (<span class="numeric">13</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_3750MKS</span> (<span class="numeric">14</span> &lt;&lt; <span class="const">ARD</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_DELAY_4000MKS</span> (<span class="numeric">15</span> &lt;&lt; <span class="const">ARD</span>)
+
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_NO_RETRANSMIT</span> (<span class="numeric">0</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_1_RETRANSMIT</span> (<span class="numeric">1</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_2_RETRANSMIT</span> (<span class="numeric">2</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_3_RETRANSMIT</span> (<span class="numeric">3</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_4_RETRANSMIT</span> (<span class="numeric">4</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_5_RETRANSMIT</span> (<span class="numeric">5</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_6_RETRANSMIT</span> (<span class="numeric">6</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_7_RETRANSMIT</span> (<span class="numeric">7</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_8_RETRANSMIT</span> (<span class="numeric">8</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_9_RETRANSMIT</span> (<span class="numeric">9</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_10_RETRANSMIT</span> (<span class="numeric">10</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_11_RETRANSMIT</span> (<span class="numeric">11</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_12_RETRANSMIT</span> (<span class="numeric">12</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_13_RETRANSMIT</span> (<span class="numeric">13</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_14_RETRANSMIT</span> (<span class="numeric">14</span> &lt;&lt; <span class="const">ARC</span>)
+<span class="keyword">#define</span> <span class="const">SETUP_RETR_UP_TO_15_RETRANSMIT</span> (<span class="numeric">15</span> &lt;&lt; <span class="const">ARC</span>)
+
+<span class="comment">// RF_SETUP</span>
+<span class="keyword">#define</span> <span class="const">CONT_WAVE</span>   <span class="numeric">7</span> <span class="comment">// (Только для nRF24L01+) Непрерывная передача несущей (для тестов)</span>
+<span class="keyword">#define</span> <span class="const">RF_DR_LOW</span>   <span class="numeric">5</span> <span class="comment">// (Только для nRF24L01+) Включает скорость 250кбит/с. RF_DR_HIGH должен быть 0</span>
+<span class="keyword">#define</span> <span class="const">PLL_LOCK</span>    <span class="numeric">4</span> <span class="comment">// Для тестов</span>
+<span class="keyword">#define</span> <span class="const">RF_DR_HIGH</span>  <span class="numeric">3</span> <span class="comment">// Выбор скорости обмена (при значении бита RF_DR_LOW = 0): 0 - 1Мбит/с; 1 - 2Мбит/с</span>
+<span class="keyword">#define</span> <span class="const">RF_PWR</span>      <span class="numeric">1</span> <span class="comment">// 2бита. Выбирает мощность передатчика: 0 - -18dBm; 1 - -16dBm; 2 - -6dBm; 3 - 0dBm</span>
+
+<span class="keyword">#define</span> <span class="const">RF_SETUP_MINUS18DBM</span> (<span class="numeric">0</span> &lt;&lt; <span class="const">RF_PWR</span>)
+<span class="keyword">#define</span> <span class="const">RF_SETUP_MINUS12DBM</span> (<span class="numeric">1</span> &lt;&lt; <span class="const">RF_PWR</span>)
+<span class="keyword">#define</span> <span class="const">RF_SETUP_MINUS6DBM</span>  (<span class="numeric">2</span> &lt;&lt; <span class="const">RF_PWR</span>)
+<span class="keyword">#define</span> <span class="const">RF_SETUP_0DBM</span>       (<span class="numeric">3</span> &lt;&lt; <span class="const">RF_PWR</span>)
+
+<span class="keyword">#define</span> <span class="const">RF_SETUP_1MBPS</span> (<span class="numeric">0</span> &lt;&lt; <span class="const">RF_DR_HIGH</span>)
+<span class="keyword">#define</span> <span class="const">RF_SETUP_2MBPS</span> (<span class="numeric">1</span> &lt;&lt; <span class="const">RF_DR_HIGH</span>)
+<span class="keyword">#define</span> <span class="const">RF_SETUP_250KBPS</span> (<span class="numeric">1</span> &lt;&lt; <span class="const">RF_DR_LOW</span>) <span class="comment">// этот режим не должен использоваться с контролем доставки</span>
+
+<span class="comment">// STATUS</span>
+<span class="keyword">#define</span> <span class="const">RX_DR</span>   <span class="numeric">6</span> <span class="comment">// Флаг получения новых данных в FIFO приёмника. Для сброса флага нужно записать 1</span>
+<span class="keyword">#define</span> <span class="const">TX_DS</span>   <span class="numeric">5</span> <span class="comment">// Флаг завершения передачи. Для сброса флага нужно записать 1</span>
+<span class="keyword">#define</span> <span class="const">MAX_RT</span>  <span class="numeric">4</span> <span class="comment">// Флаг превышения установленного числа повторов. Без сброса (записать 1) обмен невозможен</span>
+<span class="keyword">#define</span> <span class="const">RX_P_NO</span> <span class="numeric">1</span> <span class="comment">// 3 бита. Номер канала, данные для которого доступны в FIFO приёмника. 7 -  FIFO пусто.</span>
+<span class="keyword">#define</span> <span class="const">TX_FULL_STATUS</span> <span class="numeric">0</span> <span class="comment">// Признак заполнения FIFO передатчика: 1 - заполнено; 0 - есть доступные слоты </span>
+        <span class="comment">// (переименовано из TX_FULL во избежание путаницы с одноимённым битом из регистра FIFO_STATUS)</span>
+
+<span class="comment">// OBSERVE_TX</span>
+<span class="keyword">#define</span> <span class="const">PLOS_CNT</span>  <span class="numeric">4</span> <span class="comment">// 4 бита. Общее количество пакетов без подтверждения. Сбрасывается записью RF_CH</span>
+<span class="keyword">#define</span> <span class="const">ARC_CNT</span>   <span class="numeric">0</span> <span class="comment">// 4 бита. Количество предпринятых повторов при последней отправке. </span>
+
+<span class="comment">// FIFO_STATUS</span>
+<span class="keyword">#define</span> <span class="const">TX_REUSE</span>      <span class="numeric">6</span> <span class="comment">// Признак готовности последнего пакета для повторной отправки. </span>
+<span class="keyword">#define</span> <span class="const">TX_FULL_FIFO</span>  <span class="numeric">5</span> <span class="comment">// Флаг переполнения FIFO очереди передатчика.</span>
+        <span class="comment">// (переименовано из TX_FULL во избежание путаницы с одноимённым битом из регистра STATUS)</span>
+<span class="keyword">#define</span> <span class="const">TX_EMPTY</span>      <span class="numeric">4</span> <span class="comment">// Флаг освобождения FIFO очереди передатчика.</span>
+<span class="keyword">#define</span> <span class="const">RX_FULL</span>       <span class="numeric">1</span> <span class="comment">// Флаг переполнения FIFO очереди приёмника.</span>
+<span class="keyword">#define</span> <span class="const">RX_EMPTY</span>      <span class="numeric">0</span> <span class="comment">// Флаг освобождения FIFO очереди приёмника.</span>
+
+<span class="comment">// DYNDP</span>
+<span class="keyword">#define</span> <span class="const">DPL_P5</span> <span class="numeric">5</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 5</span>
+<span class="keyword">#define</span> <span class="const">DPL_P4</span> <span class="numeric">4</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 4</span>
+<span class="keyword">#define</span> <span class="const">DPL_P3</span> <span class="numeric">3</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 3</span>
+<span class="keyword">#define</span> <span class="const">DPL_P2</span> <span class="numeric">2</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 2</span>
+<span class="keyword">#define</span> <span class="const">DPL_P1</span> <span class="numeric">1</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 1</span>
+<span class="keyword">#define</span> <span class="const">DPL_P0</span> <span class="numeric">0</span> <span class="comment">// Включает приём пакетов произвольной длины по каналу 0</span>
+
+<span class="comment">// FEATURE  </span>
+<span class="keyword">#define</span> <span class="const">EN_DPL</span>      <span class="numeric">2</span> <span class="comment">// Включает поддержку приёма и передачи пакетов произвольной длины</span>
+<span class="keyword">#define</span> <span class="const">EN_ACK_PAY</span>  <span class="numeric">1</span> <span class="comment">// Разрешает передачу данных с пакетами подтверждения приёма</span>
+<span class="keyword">#define</span> <span class="const">EN_DYN_ACK</span>  <span class="numeric">0</span> <span class="comment">// Разрешает использование W_TX_PAYLOAD_NOACK</span>
+</pre>
+<a name="__h2_42"></a><h2>Подключение SPI</h2>
+<p>Чип nRF24L01+ обменивается данными с управляющим микроконтроллером по шине SPI в режиме 0 (CPHA=0, CPOL=0). Это значит, что на линии SCK до начала обмена выдерживается низкий уровень. Начинается обмен с установки низкого уровня на линии CSN, при этом и ведущая и ведомая сторона выставляют на линиях MOSI и MISO соответственно, значения старших бит передаваемых байт. При нарастающем фронте на линии SCK, происходит чтение выставленных значений противоположными сторонами. При спадающем фронте SCK, выставляются значения следующих бит.  Передача идёт от старших бит в байте к младшим. Сеанс обмена завершается установкой высокого уровня на линии CSN.</p>
+<p>nRF24L01+ поддерживает обмен по SPI на частоте до 10МГц. Однако, в случае большой паразитной емкости линий данных и при наличии помех, может потребоваться уменьшить частоту.</p>
+<br>
+<p>Примеры ниже показывают различные варианты подключения микроконтроллера к шине SPI и определяют две функции:</p>
+<p><b>void spi_init()</b> - производит  первичную настройку интерфейса SPI;</p>
+<p><b>uint8_t spi_send_recv(uint8_t data)</b> - отправляет 1 байт по SPI, по линии MOSI, дожидается окончания обмена и возвращает байт принятый по линии MISO.</p>
+<p>В этих примерах не определяется использование линии CSN.</p>
+<br>
+<br>
+<a name="__h3_43"></a><h3>Использование аппаратного интерфейса SPI</h3>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_spi1.gif" class="artimg"></td></tr></tbody></table></p>
+<p>Аппаратный интерфейс SPI микроконтроллеров AVR позволяет организовать обмен на частоте до половины частоты процессора. </p>
+<p>При инициализации интерфейса в режиме «мастера», необходимо вручную установить соответствующие биты в регистрах направлений (DDRx). Выводы MOSI, SCK и SS должны быть настроены на выход (соответствующие биты в регистре DDR – единицы), направление вывода MISO переопределяется на «вход» самим интерфейсом.</p>
+<div class="box_note"><p>Когда интерфейс SPI в микроконтроллерах AVR работает в режиме «мастера», вывод SS управляется программистом самостоятельно и не влияет на работу интерфейса, поэтому нет нужды подключать именно этот выход к входу CSN управляемого чипа. <b>Однако</b>, этот вывод микроконтроллера <b>ДОЛЖЕН</b> быть настроен на «выход», поскольку, в случае если он настроен на «вход», и на нём появится низкий уровень, то интерфейс SPI прервёт обмен и перейдёт в режим «ведомого». Во избежание путаницы, рекомендую использовать этот вывод для подключения к входу CSN.</p>
+</div>
+<br>
+<p><b>Пример кода инициализации интерфейса SPI для микроконтроллеров AVR</b></p>
+<pre class="code"><span class="keyword">#define</span> <span class="const">SPI_DDR</span> <span class="const">DDRB</span>
+
+<span class="keyword">#define</span> <span class="const">SPI_SS</span> <span class="numeric">2</span>
+<span class="keyword">#define</span> <span class="const">SPI_MOSI</span> <span class="numeric">3</span>
+<span class="keyword">#define</span> <span class="const">SPI_SCK</span> <span class="numeric">5</span>
+
+<span class="comment">// Инициализация интерфейса</span>
+<span class="keyword">void</span> <span class="method">spi_init</span>() {
+  <span class="const">SPI_DDR</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">SPI_MOSI</span>) | (<span class="numeric">1</span> &lt;&lt;  <span class="const">SPI_SCK</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">SPI_SS</span>);
+  <span class="const">SPCR</span> = (<span class="numeric">1</span> &lt;&lt; <span class="const">SPE</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">MSTR</span>); <span class="comment">// режим 0, мастер, частота 1/4 от частоты ЦП</span>
+}
+
+<span class="comment">// Передаёт и принимает 1 байт по SPI, возвращает полученное значение</span>
+<span class="keyword">uint8_t</span> <span class="method">spi_send_recv</span>(<span class="keyword">uint8_t</span> <span class="var">data</span>) {
+  <span class="const">SPDR</span> = <span class="var">data</span>;
+  <span class="keyword">while</span> (!(<span class="const">SPSR</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">SPIF</span>)));
+  <span class="keyword">return</span> <span class="const">SPDR</span>;
+}
+</pre>
+<p><i>Значения SPI_DDR, SPI_SS, SPI_MOSI, SPI_SCK в примере даны для МК ATmega8(A), ATmega48/88/168/328(P/A/PA). Для других МК подставьте нужные значения</i></p>
+<br>
+<a name="__h3_44"></a><h3>Использование аппаратного интерфейса USART в режиме SPI-master</h3>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_spi2.gif" class="artimg"></td></tr></tbody></table></p>
+<p>Некоторые микроконтроллеры из серии AVR (напр. ATmega48/88/168/328(P/A/PA)) позволяют переключить интерфейс USART в режим SPI-master. Вывод TX микроконтроллера подключается к линии MOSI, RX – к MISO, XCK – к SCK. </p>
+<p>Скорость обмена задаётся значением пары регистров UBRRnL, UBBRnH. На время инициализации рекомендуется установить их значение в 0, дабы на линии XCK появился нужный уровень.</p>
+<p>Направление выводов TX и RX переопределяется интерфейсом, однако направление вывода XCK нужно задать на «выход» явно.</p>
+<p>Интерфейс использует буферизацию принимаемых и отправляемых данных, однако для работы в режиме SPI удобнее использовать не буферизированный обмен, дожидаясь окончания приёма.</p>
+<br>
+<p><b>Пример кода инициализации интерфейса SPI для микроконтроллеров AVR</b></p>
+<pre class="code"><span class="keyword">#define</span> <span class="const">USART_DDR</span> <span class="const">DDRD</span>
+
+<span class="keyword">#define</span> <span class="const">USART_XCK</span> <span class="numeric">4</span>
+
+<span class="comment">// Инициализация интерфейса USART0 в режиме SPI-master</span>
+<span class="keyword">void</span> <span class="method">spi_init</span>() {
+  <span class="const">UBRR0</span> = <span class="numeric">0</span>; 
+  <span class="const">USART_DDR</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">USART_XCK</span>);
+  <span class="const">UCSR0C</span> = (<span class="numeric">1</span> &lt;&lt; <span class="const">UMSEL01</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">UMSEL00</span>); <span class="comment">// выбор режима SPI-master</span>
+  <span class="const">UCSR0B</span> = (<span class="numeric">1</span> &lt;&lt; <span class="const">RXEN0</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">TXEN0</span>); <span class="comment">// Включение приёмника и передатчика</span>
+  <span class="const">UBRR0</span> = <span class="numeric">1</span>;  <span class="comment">// Выбор частоты интерфейса 1/4 от частоты ЦП</span>
+}
+
+<span class="comment">// Передаёт и принимает 1 байт по SPI, возвращает полученное значение</span>
+<span class="keyword">uint8_t</span> <span class="method">spi_send_recv</span>(<span class="keyword">uint8_t</span> <span class="var">data</span>) {
+  <span class="const">UDR0</span> = <span class="var">data</span>;
+  <span class="keyword">while</span> (!(<span class="const">UCSR0A</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">RXC0</span>)));
+  <span class="keyword">return</span> <span class="const">UDR0</span>; 
+}
+</pre>
+<p><i>Значения USART_DDR и USART_XCK в примере даны для МК ATmega48/88/168/328(P/A/PA). Для других МК подставьте нужные значения</i></p>
+<br>
+<a name="__h3_45"></a><h3>Использование программной реализации интерфейса SPI</h3>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_spi3.gif" class="artimg"></td></tr></tbody></table></p>
+<p>Программная реализация интерфейса, хоть и накладывает ограничения на максимальную скорость обмена, но позволяет подключать ведомое устройство к любым доступным портам ввода/вывода. </p>
+<br>
+<p><b>Пример кода инициализации интерфейса SPI для микроконтроллеров AVR</b></p>
+<pre class="code"><span class="keyword">#define</span> <span class="const">SWSPI_DDR</span> <span class="const">DDRB</span>
+<span class="keyword">#define</span> <span class="const">SWSPI_PORT</span> <span class="const">PORTB</span>
+<span class="keyword">#define</span> <span class="const">SWSPI_PIN</span> <span class="const">PINB</span>
+
+<span class="keyword">#define</span> <span class="const">SWSPI_MOSI</span> <span class="numeric">6</span>
+<span class="keyword">#define</span> <span class="const">SWSPI_MISO</span> <span class="numeric">7</span>
+<span class="keyword">#define</span> <span class="const">SWSPI_SCK</span> <span class="numeric">8</span>
+
+<span class="comment">// Инициализация программного интерфейса SPI</span>
+<span class="keyword">void</span> <span class="method">spi_init</span>() {
+  <span class="const">SWSPI_PORT</span> &amp;= ~((<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MOSI</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_SCK</span>));
+  <span class="const">SWSPI_DDR</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MOSI</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_SCK</span>);
+  <span class="const">SWSPI_DDR</span> &amp;= ~ (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MISO</span>);
+  <span class="const">SWSPI_PORT</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MISO</span>); <span class="comment">// подтяжка на линии MISO</span>
+}
+
+<span class="comment">// Передаёт и принимает 1 байт по SPI, возвращает полученное значение</span>
+<span class="keyword">uint8_t</span> <span class="method">spi_send_recv</span>(<span class="keyword">uint8_t</span> <span class="var">data</span>) {
+  <span class="keyword">for</span> (<span class="keyword">uint8_t</span> <span class="var">i</span> = <span class="numeric">8</span>; <span class="var">i</span> &gt; <span class="numeric">0</span>; <span class="var">i</span>--) {
+    <span class="keyword">if</span> (<span class="var">data</span> &amp; <span class="numeric">0x80</span>) 
+      <span class="const">SWSPI_PORT</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MOSI</span>); <span class="comment">// передача единички</span>
+    <span class="keyword">else</span>
+      <span class="const">SWSPI_PORT</span> &amp;= ~(<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MOSI</span>); <span class="comment">// передача нулика</span>
+    <span class="const">SWSPI_PORT</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_SCK</span>);
+    <span class="var">data</span> &lt;&lt;= <span class="numeric">1</span>;
+    <span class="keyword">if</span> (<span class="const">SWSPI_PIN</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_MISO</span>)) <span class="comment">// Чтение бита на линии MISO</span>
+      <span class="var">data</span> |= <span class="numeric">1</span>; 
+    <span class="const">SWSPI_PORT</span> &amp;= ~(<span class="numeric">1</span> &lt;&lt; <span class="const">SWSPI_SCK</span>);
+  }
+  <span class="keyword">return</span> <span class="var">data</span>;
+}
+
+</pre>
+<a name="__h2_46"></a><h2>Взаимодействие с nRF24L01+</h2>
+<a name="__h3_47"></a><h3>Функции настройки портов и базового взаимодействия</h3>
+<p><table width="1" cellspacing="0" cellpadding="0" class="imgtable" align="right" style="margin-left:10px; align:right"><tbody><tr class="imgtable"><td class="imgtable"><img src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/nrf24l01p_conn.gif" class="artimg"></td></tr></tbody></table></p>
+<p>Линия <b>CSN</b>, определяющая сеанс обмена по интерфейсу SPI, имеет активным низкий уровень. Линия <b>CE</b>, наоборот, активна по высокому уровню. Чтобы избежать путанницы определим функции <b>radio_assert_ce</b>, <b>radio_deassert_ce</b>, <b>csn_assert</b>, <b>csn_deassert</b>, которые будут переводить линии ce/csn к активному (assert) и неактивному (deassert) уровню.</p>
+<p>Также ниже будут определены функции читающие/записывающие регистры и вызывающие выполнение команд чипа nRF24L01+.</p>
+<p>Но для начала нужно определить порты, на которых будет происходить обмен.</p>
+<pre class="code"><span class="keyword">#define</span> <span class="const">RADIO_PORT</span> <span class="const">PORTD</span>
+<span class="keyword">#define</span> <span class="const">RADIO_DDR</span> <span class="const">DDRD</span>
+<span class="keyword">#define</span> <span class="const">RADIO_PIN</span> <span class="const">PIND</span>
+
+<span class="keyword">#define</span> <span class="const">RADIO_CSN</span> <span class="numeric">1</span>
+<span class="keyword">#define</span> <span class="const">RADIO_CE</span> <span class="numeric">2</span>
+<span class="keyword">#define</span> <span class="const">RADIO_IRQ</span> <span class="numeric">3</span>
+
+<span class="comment">// Выбирает активное состояние (высокий уровень) на линии CE</span>
+<span class="keyword">inline</span> <span class="keyword">void</span> <span class="method">radio_assert_ce</span>() {
+  <span class="const">RADIO_PORT</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CE</span>); <span class="comment">// Установка высокого уровня на линии CE</span>
+}
+
+<span class="comment">// Выбирает неактивное состояние (низкий уровень) на линии CE</span>
+<span class="keyword">inline</span> <span class="keyword">void</span> <span class="method">radio_deassert_ce</span>() {
+  <span class="const">RADIO_PORT</span> &amp;= ~(<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CE</span>); <span class="comment">// Установка низкого уровня на линии CE  </span>
+}
+
+<span class="comment">// Поскольку функции для работы с csn не предполагается использовать в иных файлах, их можно объявить static</span>
+
+<span class="comment">// Выбирает активное состояние (низкий уровень) на линии CSN</span>
+<span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">csn_assert</span>() {
+  <span class="const">RADIO_PORT</span> &amp;= ~(<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CSN</span>); <span class="comment">// Установка низкого уровня на линии CSN</span>
+}
+
+<span class="comment">// Выбирает неактивное состояние (высокий уровень) на линии CSN</span>
+<span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">csn_deassert</span>() {
+  <span class="const">RADIO_PORT</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CSN</span>); <span class="comment">// Установка высокого уровня на линии CSN</span>
+}
+
+<span class="comment">// Инициализирует порты </span>
+<span class="keyword">void</span> <span class="method">radio_init</span>() {
+  <span class="const">RADIO_DDR</span> |= (<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CSN</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">RADIO_CE</span>); <span class="comment">// Ножки CSN и CE на выход</span>
+  <span class="const">RADIO_DDR</span> &amp;= ~(<span class="numeric">1</span> &lt; <span class="const">RADIO_IRQ</span>); <span class="comment">// IRQ - на вход</span>
+  <span class="method">csn_deassert</span>();
+  <span class="method">radio_deassert_ce</span>();
+  <span class="method">spi_init</span>();
+}
+
+<span class="comment">// Выполняет команду cmd, и читает count байт ответа, помещая их в буфер buf, возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_read_buf</span>(<span class="keyword">uint8_t</span> <span class="var">cmd</span>, <span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">count</span>) {
+  <span class="method">csn_assert</span>();
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">spi_send_recv</span>(<span class="var">cmd</span>);
+  <span class="keyword">while</span> (<span class="var">count</span>--) {
+    *(<span class="var">buf</span>++) = <span class="method">spi_send_recv</span>(<span class="numeric">0xFF</span>);
+  }
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">status</span>;
+}
+
+<span class="comment">// Выполняет команду cmd, и передаёт count байт параметров из буфера buf, возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_write_buf</span>(<span class="keyword">uint8_t</span> <span class="var">cmd</span>, <span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">count</span>) {
+  <span class="method">csn_assert</span>();
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">spi_send_recv</span>(<span class="var">cmd</span>);
+  <span class="keyword">while</span> (<span class="var">count</span>--) {
+    <span class="method">spi_send_recv</span>(*(<span class="var">buf</span>++));
+  }
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">status</span>;
+}
+
+<span class="comment">// Читает значение однобайтового регистра reg (от 0 до 31) и возвращает его</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_readreg</span>(<span class="keyword">uint8_t</span> <span class="var">reg</span>) {
+  <span class="method">csn_assert</span>();
+  <span class="method">spi_send_recv</span>((<span class="var">reg</span> &amp; <span class="numeric">31</span>) | <span class="const">R_REGISTER</span>);
+  <span class="keyword">uint8_t</span> <span class="var">answ</span> = <span class="method">spi_send_recv</span>(<span class="numeric">0xFF</span>);
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">answ</span>;
+}
+
+<span class="comment">// Записывает значение однобайтового регистра reg (от 0 до 31), возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_writereg</span>(<span class="keyword">uint8_t</span> <span class="var">reg</span>, <span class="keyword">uint8_t</span> <span class="var">val</span>) {
+  <span class="method">csn_assert</span>();
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">spi_send_recv</span>((<span class="var">reg</span> &amp; <span class="numeric">31</span>) | <span class="const">W_REGISTER</span>);
+  <span class="method">spi_send_recv</span>(<span class="var">val</span>);
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">status</span>;
+}
+
+<span class="comment">// Читает count байт многобайтового регистра reg (от 0 до 31) и сохраняет его в буфер buf,</span>
+<span class="comment">// возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_readreg_buf</span>(<span class="keyword">uint8_t</span> <span class="var">reg</span>, <span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">count</span>) {
+  <span class="keyword">return</span> <span class="method">radio_read_buf</span>((<span class="var">reg</span> &amp; <span class="numeric">31</span>) | <span class="const">R_REGISTER</span>, <span class="var">buf</span>, <span class="var">count</span>);
+}
+
+<span class="comment">// Записывает count байт из буфера buf в многобайтовый регистр reg (от 0 до 31), возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_writereg_buf</span>(<span class="keyword">uint8_t</span> <span class="var">reg</span>, <span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">count</span>) {
+  <span class="keyword">return</span> <span class="method">radio_write_buf</span>((<span class="var">reg</span> &amp; <span class="numeric">31</span>) | <span class="const">W_REGISTER</span>, <span class="var">buf</span>, <span class="var">count</span>);
+}
+
+<span class="comment">// Возвращает размер данных в начале FIFO очереди приёмника</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_read_rx_payload_width</span>() {
+  <span class="method">csn_assert</span>();
+  <span class="method">spi_send_recv</span>(<span class="const">R_RX_PL_WID</span>);
+  <span class="keyword">uint8_t</span> <span class="var">answ</span> = <span class="method">spi_send_recv</span>(<span class="numeric">0xFF</span>);
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">answ</span>;
+}
+
+<span class="comment">// Выполняет команду. Возвращает регистр статуса</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_cmd</span>(<span class="keyword">uint8_t</span> <span class="var">cmd</span>) {
+  <span class="method">csn_assert</span>();
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">spi_send_recv</span>(<span class="var">cmd</span>);
+  <span class="method">csn_deassert</span>();
+  <span class="keyword">return</span> <span class="var">status</span>;
+}
+
+<span class="comment">// Возвращает 1, если на линии IRQ активный (низкий) уровень.</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_is_interrupt</span>() {
+  <span class="keyword">return</span> (<span class="const">RADIO_PIN</span> &amp; <span class="const">RADIO_IRQ</span>) ? <span class="numeric">0</span> : <span class="numeric">1</span>;
+}
+</pre>
+<br>
+<p>В крайних случаях, если нужно сэкономить линию, пин прерывания можно не подключать, а проверять наличие прерывания анализируя регистр статуса:</p>
+<br>
+<pre class="code"><span class="keyword">uint8_t</span> <span class="method">radio_is_interrupt</span>() {
+<span class="comment">// использовать этот вариант только в крайних случаях!!!</span>
+  <span class="keyword">return</span> (<span class="method">radio_cmd</span>(<span class="const">NOP</span>) &amp; ((<span class="numeric">1</span> &lt;&lt; <span class="const">RX_DR</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">TX_DS</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">MAX_RT</span>))) ? <span class="numeric">1</span> : <span class="numeric">0</span>;
+}
+</pre>
+<br>
+<br>
+<br>
+<a name="__h3_48"></a><h3>Первоначальная настройка регистров</h3>
+<br>
+<p>Хотя все регистры имеют определённое значение по-умолчанию, которое загружается в них после подачи питания, рекомендую явно задать значения всех необходимых регистров. Особенно это актуально, если линия CSN не притянута внешним резистором к питанию: тогда в момент сброса микроконтроллера, радио-модуль может улавливать помехи и хаотичным образом перенастроить регистры.</p>
+<br>
+<p>Пример ниже показывает инициализацию с готовностью работы в режиме приёма по каналу 1 и передачи. Выбирается длина адреса 5-байт, радио канал 3 (2403 МГц). Собственный адрес 0xE7E7E7E7E7, адрес удалённой стороны - 0xC2C2C2C2C2</p>
+<br>
+<pre class="code"><span class="comment">// Функция производит первоначальную настройку устройства. Возвращает 1, в случае успеха, 0 в случае ошибки</span>
+<span class="keyword">uint8_t</span> <span class="method">radio_start</span>() {
+  <span class="keyword">uint8_t</span> <span class="var">self_addr</span>[] = {<span class="numeric">0xE7</span>, <span class="numeric">0xE7</span>, <span class="numeric">0xE7</span>, <span class="numeric">0xE7</span>, <span class="numeric">0xE7</span>}; <span class="comment">// Собственный адрес</span>
+  <span class="keyword">uint8_t</span> <span class="var">remote_addr</span>[] = {<span class="numeric">0xC2</span>, <span class="numeric">0xC2</span>, <span class="numeric">0xC2</span>, <span class="numeric">0xC2</span>, <span class="numeric">0xC2</span>}; <span class="comment">// Адрес удалённой стороны</span>
+  <span class="keyword">uint8_t</span> <span class="var">chan</span> = <span class="numeric">3</span>; <span class="comment">// Номер радио-канала (в диапазоне 0 - 125)</span>
+
+  <span class="method">radio_deassert_ce</span>();
+  <span class="keyword">for</span>(<span class="keyword">uint8_t</span> <span class="var">cnt</span> = <span class="numeric">100</span>;;) {
+    <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, (<span class="numeric">1</span> &lt;&lt; <span class="const">EN_CRC</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">CRCO</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>)); <span class="comment">// Выключение питания</span>
+    <span class="keyword">if</span> (<span class="method">radio_readreg</span>(<span class="const">CONFIG</span>) == ((<span class="numeric">1</span> &lt;&lt; <span class="const">EN_CRC</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">CRCO</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>))) 
+      <span class="keyword">break</span>;
+    <span class="comment">// Если прочитано не то что записано, то значит либо радио-чип ещё инициализируется, либо не работает.</span>
+    <span class="keyword">if</span> (!<span class="var">cnt</span>--)
+      <span class="keyword">return</span> <span class="numeric">0</span>; <span class="comment">// Если после 100 попыток не удалось записать что нужно, то выходим с ошибкой</span>
+    <span class="method">_delay_ms</span>(<span class="numeric">1</span>);
+  }
+
+  <span class="method">radio_writereg</span>(<span class="const">EN_AA</span>, (<span class="numeric">1</span> &lt;&lt; <span class="const">ENAA_P1</span>)); <span class="comment">// включение автоподтверждения только по каналу 1</span>
+  <span class="method">radio_writereg</span>(<span class="const">EN_RXADDR</span>, (<span class="numeric">1</span> &lt;&lt; <span class="const">ERX_P0</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">ERX_P1</span>)); <span class="comment">// включение каналов 0 и 1</span>
+  <span class="method">radio_writereg</span>(<span class="const">SETUP_AW</span>, <span class="const">SETUP_AW_5BYTES_ADDRESS</span>); <span class="comment">// выбор длины адреса 5 байт</span>
+  <span class="method">radio_writereg</span>(<span class="const">SETUP_RETR</span>, <span class="const">SETUP_RETR_DELAY_250MKS</span> | <span class="const">SETUP_RETR_UP_TO_2_RETRANSMIT</span>); 
+  <span class="method">radio_writereg</span>(<span class="const">RF_CH</span>, <span class="var">chan</span>); <span class="comment">// Выбор частотного канала</span>
+  <span class="method">radio_writereg</span>(<span class="const">RF_SETUP</span>, <span class="const">RF_SETUP_1MBPS</span> | <span class="const">RF_SETUP_0DBM</span>); <span class="comment">// выбор скорости 1 Мбит/с и мощности 0dBm</span>
+  
+  <span class="method">radio_writereg_buf</span>(<span class="const">RX_ADDR_P0</span>, &amp;<span class="var">remote_addr</span>[<span class="numeric">0</span>], <span class="numeric">5</span>); <span class="comment">// Подтверждения приходят на канал 0 </span>
+  <span class="method">radio_writereg_buf</span>(<span class="const">TX_ADDR</span>, &amp;<span class="var">remote_addr</span>[<span class="numeric">0</span>], <span class="numeric">5</span>);
+
+  <span class="method">radio_writereg_buf</span>(<span class="const">RX_ADDR_P1</span>, &amp;<span class="var">self_addr</span>[<span class="numeric">0</span>], <span class="numeric">5</span>);
+  
+  <span class="method">radio_writereg</span>(<span class="const">RX_PW_P0</span>, <span class="numeric">0</span>);
+  <span class="method">radio_writereg</span>(<span class="const">RX_PW_P1</span>, <span class="numeric">32</span>); 
+  <span class="method">radio_writereg</span>(<span class="const">DYNPD</span>, (<span class="numeric">1</span> &lt;&lt; <span class="const">DPL_P0</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">DPL_P1</span>)); <span class="comment">// включение произвольной длины для каналов 0 и 1</span>
+  <span class="method">radio_writereg</span>(<span class="const">FEATURE</span>, <span class="numeric">0x04</span>); <span class="comment">// разрешение произвольной длины пакета данных</span>
+
+  <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, (<span class="numeric">1</span> &lt;&lt; <span class="const">EN_CRC</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">CRCO</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>)); <span class="comment">// Включение питания</span>
+  <span class="keyword">return</span> (<span class="method">radio_readreg</span>(<span class="const">CONFIG</span>) == ((<span class="numeric">1</span> &lt;&lt; <span class="const">EN_CRC</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">CRCO</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>))) ? <span class="numeric">1</span> : <span class="numeric">0</span>;
+}
+</pre>
+<br>
+<a name="__h3_49"></a><h3>Отправка и приём сообщений</h3>
+<a name="__h4_50"></a><h4>Двусторонний обмен</h4>
+<p>В общем случае, алгоритм работы программы таков: всё время радио-модуль находится в режиме приёма (PRX), ожидая, когда к нему обратятся по радио-эфиру.</p>
+<p>Когда возникает необходимость передать пакет, nRF24L01+ переводится в режим передатчика, осуществляет отправку пакета, а по завершению - удачному, или нет - возвращается в режим приёмника.</p>
+<br>
+<p>Примере ниже определены функции для обмена по такому сценарию</p>
+<p>Вызов функции <i>send_data</i> осуществляет отправку буфера указанной длины.</p>
+<p>Основной цикл программы периодически вызывает функцию <i>check_radio</i>, которая, в свою очередь, анализирует прерывания от радио-чипа и, в зависимости от них, вызывает: </p>
+<p class="hyphen">-&nbsp;функцию <i>on_packet</i> когда принят новый пакет по каналу 1.</p>
+<p class="hyphen">-&nbsp;функцию <i>on_send_error</i> когда при передаче пакета было превышено количество попыток.</p>
+<br>
+<pre class="code"><span class="comment">// Вызывается, когда превышено число попыток отправки, а подтверждение так и не было получено.</span>
+<span class="keyword">void</span> <span class="method">on_send_error</span>() {
+ <span class="comment">// TODO здесь можно описать обработчик неудачной отправки</span>
+}
+
+<span class="comment">// Вызывается при получении нового пакета по каналу 1 от удалённой стороны.</span>
+<span class="comment">// buf - буфер с данными, size - длина данных (от 1 до 32)</span>
+<span class="keyword">void</span> <span class="method">on_packet</span>(<span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">size</span>) {
+ <span class="comment">// TODO здесь нужно написать обработчик принятого пакета</span>
+
+ <span class="comment">// Если предполагается немедленная отправка ответа, то необходимо обеспечить задержку ,</span>
+ <span class="comment">// во время которой чип отправит подтверждение о приёме </span>
+ <span class="comment">// чтобы с момента приёма пакета до перевода в режим PTX прошло:</span>
+ <span class="comment">// 130мкс + ((длина_адреса + длина_CRC + длина_данных_подтверждения) * 8 + 17) / скорость_обмена</span>
+ <span class="comment">// При типичных условиях и частоте МК 8 мГц достаточно дополнительной задержки 100мкс</span>
+}
+
+
+
+<span class="comment">// Помещает пакет в очередь отправки. </span>
+<span class="comment">// buf - буфер с данными, size - длина данных (от 1 до 32)</span>
+<span class="keyword">uint8_t</span> <span class="method">send_data</span>(<span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">size</span>) {
+  <span class="method">radio_deassert_ce</span>(); <span class="comment">// Если в режиме приёма, то выключаем его </span>
+  <span class="keyword">uint8_t</span> <span class="var">conf</span> = <span class="method">radio_readreg</span>(<span class="const">CONFIG</span>);
+  <span class="keyword">if</span> (!(<span class="var">conf</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>))) <span class="comment">// Если питание по какой-то причине отключено, возвращаемся с ошибкой</span>
+    <span class="keyword">return</span> <span class="numeric">0</span>; 
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, <span class="var">conf</span> &amp; ~(<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>)); <span class="comment">// Сбрасываем бит PRIM_RX</span>
+  <span class="keyword">if</span> (<span class="var">status</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">TX_FULL_STATUS</span>))  <span class="comment">// Если очередь передатчика заполнена, возвращаемся с ошибкой</span>
+    <span class="keyword">return</span> <span class="numeric">0</span>;
+  <span class="method">radio_write_buf</span>(<span class="const">W_TX_PAYLOAD</span>, <span class="var">buf</span>, <span class="var">size</span>); <span class="comment">// Запись данных на отправку</span>
+  <span class="method">radio_assert_ce</span>(); <span class="comment">// Импульс на линии CE приведёт к началу передачи</span>
+  <span class="method">_delay_us</span>(<span class="numeric">15</span>); <span class="comment">// Нужно минимум 10мкс, возьмём с запасом</span>
+  <span class="method">radio_deassert_ce</span>();
+  <span class="keyword">return</span> <span class="numeric">1</span>;
+}
+
+<span class="keyword">void</span> <span class="method">check_radio</span>() {
+  <span class="keyword">if</span> (!<span class="method">radio_is_interrupt</span>()) <span class="comment">// Если прерывания нет, то не задерживаемся</span>
+    <span class="keyword">return</span>;
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">radio_cmd</span>(<span class="const">NOP</span>);
+  <span class="method">radio_writereg</span>(<span class="const">STATUS</span>, <span class="var">status</span>); <span class="comment">// Просто запишем регистр обратно, тем самым сбросив биты прерываний</span>
+  
+  <span class="keyword">if</span> (<span class="var">status</span> &amp; ((<span class="numeric">1</span> &lt;&lt; <span class="const">TX_DS</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">MAX_RT</span>))) { <span class="comment">// Завершена передача успехом, или нет,</span>
+    <span class="keyword">if</span> (<span class="var">status</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">MAX_RT</span>)) { <span class="comment">// Если достигнуто максимальное число попыток</span>
+      <span class="method">radio_cmd</span>(<span class="const">FLUSH_TX</span>); <span class="comment">// Удалим последний пакет из очереди</span>
+      <span class="method">on_send_error</span>(); <span class="comment">// Вызовем обработчик</span>
+    } 
+    <span class="keyword">if</span> (!(<span class="method">radio_readreg</span>(<span class="const">FIFO_STATUS</span>) &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">TX_EMPTY</span>))) { <span class="comment">// Если в очереди передатчика есть что передавать</span>
+      <span class="method">radio_assert_ce</span>(); <span class="comment">// Импульс на линии CE приведёт к началу передачи</span>
+      <span class="method">_delay_us</span>(<span class="numeric">15</span>); <span class="comment">// Нужно минимум 10мкс, возьмём с запасом</span>
+      <span class="method">radio_deassert_ce</span>();
+    } <span class="keyword">else</span> {
+      <span class="keyword">uint8_t</span> <span class="var">conf</span> = <span class="method">radio_readreg</span>(<span class="const">CONFIG</span>);
+      <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, <span class="var">conf</span> | (<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>)); <span class="comment">// Устанавливаем бит PRIM_RX: приём</span>
+      <span class="method">radio_assert_ce</span>(); <span class="comment">// Высокий уровень на линии CE переводит радио-чип в режим приёма</span>
+    }
+  }
+  <span class="keyword">uint8_t</span> <span class="var">protect</span> = <span class="numeric">4</span>; <span class="comment">// В очереди FIFO не должно быть более 3 пакетов. Если больше, значит что-то не так</span>
+  <span class="keyword">while</span> (((<span class="var">status</span> &amp; (<span class="numeric">7</span> &lt;&lt; <span class="const">RX_P_NO</span>)) != (<span class="numeric">7</span> &lt;&lt; <span class="const">RX_P_NO</span>)) &amp;&amp; <span class="var">protect</span>--) { <span class="comment">// Пока в очереди есть принятый пакет</span>
+    <span class="keyword">uint8_t</span> <span class="var">l</span> = <span class="method">radio_read_rx_payload_width</span>(); <span class="comment">// Узнаём длину пакета</span>
+    <span class="keyword">if</span> (<span class="var">l</span> &gt; <span class="numeric">32</span>) { <span class="comment">// Ошибка. Такой пакет нужно сбросить</span>
+      <span class="method">radio_cmd</span>(<span class="const">FLUSH_RX</span>); 
+    } <span class="keyword">else</span> { 
+      <span class="keyword">uint8_t</span> <span class="var">buf</span>[<span class="numeric">32</span>]; <span class="comment">// буфер для принятого пакета</span>
+      <span class="method">radio_read_buf</span>(<span class="const">R_RX_PAYLOAD</span>, &amp;<span class="var">buf</span>[<span class="numeric">0</span>], <span class="var">l</span>); <span class="comment">// начитывается пакет</span>
+      <span class="keyword">if</span> ((<span class="var">status</span> &amp; (<span class="numeric">7</span> &lt;&lt; <span class="const">RX_P_NO</span>)) == (<span class="numeric">1</span> &lt;&lt; <span class="const">RX_P_NO</span>)) { <span class="comment">// если datapipe 1 </span>
+        <span class="method">on_packet</span>(&amp;<span class="var">buf</span>[<span class="numeric">0</span>], <span class="var">l</span>); <span class="comment">// вызываем обработчик полученного пакета</span>
+      }
+    }         
+    <span class="var">status</span> = <span class="method">radio_cmd</span>(<span class="const">NOP</span>);
+  }
+}
+
+
+<span class="comment">// Основной цикл</span>
+<span class="keyword">int</span> <span class="method">main</span>(<span class="keyword">void</span>) {
+  <span class="method">radio_init</span>();
+  <span class="keyword">while</span> (!<span class="method">radio_start</span>()) { 
+    <span class="method">_delay_ms</span>(<span class="numeric">1000</span>);
+  }
+  <span class="comment">// Перед включением питания чипа и сигналом CE должно пройти время достаточное для начала работы осциллятора</span>
+  <span class="comment">// Для типичных резонаторов с эквивалентной индуктивностью не более 30мГн достаточно 1.5 мс</span>
+  <span class="method">_delay_ms</span>(<span class="numeric">2</span>); 
+  
+  <span class="method">radio_assert_ce</span>();
+
+  <span class="keyword">for</span>(;;) {
+    <span class="method">check_radio</span>();
+
+    <span class="comment">// TODO здесь основной код программы</span>
+  }
+}
+</pre>
+<br>
+<br>
+<a name="__h4_51"></a><h4>Только приём</h4>
+<br>
+<p>В случае, если устройство работает только на приём, т.е. принимает пакеты, но не отправляет их, канал 0 может быть запрещён в регистрах <a href="https://aterlux.ru/article/nrf24l01p#EN_RXADDR">EN_RXADDR</a> и <a href="https://aterlux.ru/article/nrf24l01p#DYNPD">DYNPD</a> в <i>radio_start()</i>.</p>
+<p>Из функции <i> check_radio()</i> можно исключить часть, ответственную за прерывания передатчика.</p>
+<br>
+<a name="__h4_52"></a><h4>Только передача</h4>
+<br>
+<p>Если вы реализуете пульт дистанционного управления, то он должен обеспечивать только передачу. А в целях экономии энергии сразу после передачи одиночной команды переводить радио-чип в спящий режим.</p>
+<p>В этом случае в <i>radio_start()</i> канал 1 может быть запрещён в регистрах <a href="https://aterlux.ru/article/nrf24l01p#EN_RXADDR">EN_RXADDR</a> и <a href="https://aterlux.ru/article/nrf24l01p#DYNPD">DYNPD</a>.</p>
+<br>
+<p>Функции передачи сообщения и обработчики прерываний могут выглядеть так:</p>
+<br>
+<pre class="code"><span class="comment">// Помещает пакет в очередь отправки. </span>
+<span class="comment">// buf - буфер с данными, size - длина данных (от 1 до 32)</span>
+<span class="keyword">uint8_t</span> <span class="method">send_data</span>(<span class="keyword">uint8_t</span> * <span class="var">buf</span>, <span class="keyword">uint8_t</span> <span class="var">size</span>) {
+  <span class="method">radio_deassert_ce</span>(); <span class="comment">// Если в режиме приёма, то выключаем его </span>
+  <span class="keyword">uint8_t</span> <span class="var">conf</span> = <span class="method">radio_readreg</span>(<span class="const">CONFIG</span>);
+  <span class="comment">// Сбрасываем бит PRIM_RX, и включаем питание установкой PWR_UP</span>
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, (<span class="var">conf</span> &amp; ~(<span class="numeric">1</span> &lt;&lt; <span class="const">PRIM_RX</span>)) | (<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>)); 
+  <span class="keyword">if</span> (<span class="var">status</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">TX_FULL_STATUS</span>))  <span class="comment">// Если очередь передатчика заполнена, возвращаемся с ошибкой</span>
+    <span class="keyword">return</span> <span class="numeric">0</span>;
+  <span class="keyword">if</span> (!(<span class="var">conf</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>))) <span class="comment">// Если питание не было включено, то ждём, пока запустится осциллятор</span>
+    <span class="method">_delay_ms</span>(<span class="numeric">2</span>); 
+  <span class="method">radio_write_buf</span>(<span class="const">W_TX_PAYLOAD</span>, <span class="var">buf</span>, <span class="var">size</span>); <span class="comment">// Запись данных на отправку</span>
+  <span class="method">radio_assert_ce</span>(); <span class="comment">// Импульс на линии CE приведёт к началу передачи</span>
+  <span class="method">_delay_us</span>(<span class="numeric">15</span>); <span class="comment">// Нужно минимум 10мкс, возьмём с запасом</span>
+  <span class="method">radio_deassert_ce</span>();
+  <span class="keyword">return</span> <span class="numeric">1</span>;
+}
+
+<span class="keyword">void</span> <span class="method">check_radio</span>() {
+  <span class="keyword">if</span> (!<span class="method">radio_is_interrupt</span>()) <span class="comment">// Если прерывания нет, то не задерживаемся</span>
+    <span class="keyword">return</span>;
+  <span class="keyword">uint8_t</span> <span class="var">status</span> = <span class="method">radio_cmd</span>(<span class="const">NOP</span>);
+  <span class="method">radio_writereg</span>(<span class="const">STATUS</span>, <span class="var">status</span>); <span class="comment">// Просто запишем регистр обратно, тем самым сбросив биты прерываний</span>
+  
+  <span class="keyword">if</span> (<span class="var">status</span> &amp; ((<span class="numeric">1</span> &lt;&lt; <span class="const">TX_DS</span>) | (<span class="numeric">1</span> &lt;&lt; <span class="const">MAX_RT</span>))) { <span class="comment">// Завершена передача успехом, или нет,</span>
+    <span class="keyword">if</span> (<span class="var">status</span> &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">MAX_RT</span>)) { <span class="comment">// Если достигнуто максимальное число попыток</span>
+      <span class="method">radio_cmd</span>(<span class="const">FLUSH_TX</span>); <span class="comment">// Удалим последний пакет из очереди</span>
+      <span class="method">on_send_error</span>(); <span class="comment">// Вызовем обработчик</span>
+    } 
+    <span class="keyword">if</span> (!(<span class="method">radio_readreg</span>(<span class="const">FIFO_STATUS</span>) &amp; (<span class="numeric">1</span> &lt;&lt; <span class="const">TX_EMPTY</span>))) { <span class="comment">// Если в очереди передатчика есть что передавать</span>
+      <span class="method">radio_assert_ce</span>(); <span class="comment">// Импульс на линии CE приведёт к началу передачи</span>
+      <span class="method">_delay_us</span>(<span class="numeric">15</span>); <span class="comment">// Нужно минимум 10мкс, возьмём с запасом</span>
+      <span class="method">radio_deassert_ce</span>();
+    } <span class="keyword">else</span> {
+      <span class="keyword">uint8_t</span> <span class="var">conf</span> = <span class="method">radio_readreg</span>(<span class="const">CONFIG</span>);
+      <span class="method">radio_writereg</span>(<span class="const">CONFIG</span>, <span class="var">conf</span> &amp; ~(<span class="numeric">1</span> &lt;&lt; <span class="const">PWR_UP</span>)); <span class="comment">// Если пусто, отключаем питание</span>
+    }
+  }
+  <span class="keyword">uint8_t</span> <span class="var">protect</span> = <span class="numeric">4</span>; <span class="comment">// В очереди FIFO не должно быть более 3 пакетов. Если больше, значит что-то не так</span>
+  <span class="keyword">while</span> (((<span class="var">status</span> &amp; (<span class="numeric">7</span> &lt;&lt; <span class="const">RX_P_NO</span>)) != (<span class="numeric">7</span> &lt;&lt; <span class="const">RX_P_NO</span>)) &amp;&amp; <span class="var">protect</span>--) { <span class="comment">// Пока в очереди есть принятый пакет</span>
+    <span class="method">radio_cmd</span>(<span class="const">FLUSH_RX</span>); <span class="comment">// во всех случаях выкидываем пришедший пакет.</span>
+    <span class="var">status</span> = <span class="method">radio_cmd</span>(<span class="const">NOP</span>);
+  }
+}
+</pre>
+<script type="text/javascript" async="" src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/watch.js.Без названия"></script><script type="text/javascript" src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/openapi.js.Без названия"></script>
+
+<script type="text/javascript">
+  VK.init({apiId: 3679790, onlyWidgets: true});
+</script>
+
+<div id="vk_like" style="width: 350px; height: 24px; background: none; position: relative; clear: both;"><iframe name="fXDc5c32" frameborder="0" src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/widget_like.html" width="100%" height="24" scrolling="no" id="vkwidget1" style="overflow: hidden; height: 24px; width: 350px; z-index: 150;"></iframe></div>
+<script type="text/javascript">
+VK.Widgets.Like("vk_like", {type: "full", verb: 1, height: 24});
+</script>
+<br>
+<div id="vk_comments" style="width: 496px; height: 2100px; background: none;"><iframe name="fXDec2e6" frameborder="0" src="./_Подключение модулей связи 2,4ГГц на базе чипов nRF24L01+ к микроконтроллеру_files/widget_comments.html" width="496" height="133" scrolling="no" id="vkwidget2" style="overflow: hidden; height: 2100px;"></iframe></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
+</script>
+<br>
+</div><!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter21973744 = new Ya.Metrika({id:21973744,
+                    trackLinks:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/21973744" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<br><font size="1" color="#C0C0C0">10 ms; mod: Sat, 06 May 2017 20:41:51 GMT; gen: Mon, 22 Jul 2019 21:17:10 GMT</font>
+    </td>
+   </tr>
+  </tbody></table>
+ 
+
+</body></html>
