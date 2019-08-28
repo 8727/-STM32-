@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F103C6 -DSTM32F10X_LD -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt\users -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt\stm_lib\inc -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt\stm_lib -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt\cmsis -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt\cmsis_boot -I..\..\..\..\..\SmartMode\Projects -I..\..\..\..\..\SmartMode\Projects\CAN_protocol_stm32f103_test_interrupt">
+      <target file="stm32f10x_rcc.o" lastModified="15644a2da76">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="15620d5ac3f"/>
+      </target>
+      <target file="misc.o" lastModified="15644a2dae5">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="15620d5cc52"/>
+      </target>
+      <target file="stm32f10x_can.o" lastModified="15644a2d87a">
+         <source file="..\..\..\stm_lib\src\stm32f10x_can.c" lastModified="15620d5bf55"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="15644a2d7e5">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="15620d5aca8"/>
+      </target>
+      <target file="startup_stm32f10x_ld.o" lastModified="15644a2d76f">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_ld.c" lastModified="15620d5ac4c"/>
+      </target>
+      <target file="can.o" lastModified="15644a2d9ea">
+         <source file="..\..\..\users\can.c" lastModified="15644a2cf1d"/>
+      </target>
+      <target file="main.o" lastModified="15644a2d96c">
+         <source file="..\..\..\main.c" lastModified="1562c4ed94d"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="15644a2d8fd">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="15620d5ac1e"/>
+      </target>
+   </processor>
+</history>

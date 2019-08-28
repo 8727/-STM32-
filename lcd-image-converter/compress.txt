@@ -1,0 +1,19 @@
+0 - start.raw, led_off.raw, led_on.raw
+16769024 - img_config.bin
+16776960 - Config system
+
+
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\led_on.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\led_on.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\led_off.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\led_off.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l1.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l1.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l2.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l2.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l3.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l3.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l4.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l4.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l5.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l5.bin hx8347a 64
+D:\!STM32_MODULES\UK_v0.01\gui\bm2rgbi.exe D:\!STM32_MODULES\UK_v0.01\gui\img\l6.bmp D:\!STM32_MODULES\UK_v0.01\gui\bin\l6.bin hx8347a 64
+
+
+D:\!PR_STM_32\UK_v0.01\gui\bm2rgbi.exe D:\!PR_STM_32\UK_v0.01\gui\img\green.bmp D:\!PR_STM_32\UK_v0.01\gui\img\green.bin hx8347a 64
+
+
+

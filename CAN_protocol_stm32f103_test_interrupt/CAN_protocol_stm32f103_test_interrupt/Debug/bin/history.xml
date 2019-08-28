@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=CAN_protocol_stm32f103_test_interrupt.map -O0 --gc-sections -LD:\CooCox\CoIDE_1_78\configuration\ProgramData\CAN_protocol_stm32f103_test_interrupt -TD:\CooCox\CoIDE_1_78\configuration\ProgramData\CAN_protocol_stm32f103_test_interrupt/link.ld -g">
+      <target file="CAN_protocol_stm32f103_test_interrupt.elf" lastModified="15644a2dd85">
+         <source file="..\obj\startup_stm32f10x_ld.o" lastModified="15644a2d76f"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="15644a2d7e5"/>
+         <source file="..\obj\stm32f10x_can.o" lastModified="15644a2d87a"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="15644a2d8fd"/>
+         <source file="..\obj\main.o" lastModified="15644a2d96c"/>
+         <source file="..\obj\can.o" lastModified="15644a2d9ea"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="15644a2da76"/>
+         <source file="..\obj\misc.o" lastModified="15644a2dae5"/>
+      </target>
+   </processor>
+</history>
